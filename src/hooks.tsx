@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { bind, play, setEnabled } from "cuelume";
 import type { Lang } from "./content";
 
 type Theme = "dark" | "light";
@@ -13,6 +14,29 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
 export const useLang = () => useContext(LangCtx);
 export const tr = (obj: { es: string; en: string }, lang: Lang) => obj[lang];
+
+// Cuelume interaction sounds — the app owns the on/off preference (the library
+// itself doesn't persist). Default OFF so the site is silent until a visitor
+// opts in via the nav toggle; enabling plays a confirmation cue.
+export function useSound(): [boolean, () => void] {
+  const [on, setOn] = useState<boolean>(() => localStorage.getItem("sound") === "on");
+  useEffect(() => {
+    try { bind(); } catch { /* SSR / unsupported — no-op */ }
+  }, []);
+  useEffect(() => {
+    try { setEnabled(on); } catch { /* no-op */ }
+  }, [on]);
+  const toggle = () =>
+    setOn((prev) => {
+      const next = !prev;
+      localStorage.setItem("sound", next ? "on" : "off");
+      if (next) {
+        try { setEnabled(true); play("toggle"); } catch { /* no-op */ }
+      }
+      return next;
+    });
+  return [on, toggle];
+}
 
 export function useTheme(): [Theme, () => void] {
   const [theme, setTheme] = useState<Theme>(() => {

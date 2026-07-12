@@ -176,3 +176,6 @@
 @media (max-width: 820px) { .robot-hint { display: none; } }
 
 .project-private { color: var(--text-dim); cursor: default; }
+
+.pill.on { border-color: var(--brand-2); color: var(--brand-2);
+  box-shadow: 0 0 0 1px var(--brand-2) inset, 0 0 14px rgba(23,200,180,.3); }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { projects, skillGroups, timeline, type Project } from "./content";
-import { AppProviders, Reveal, tr, useCountUp, useLang, useTheme } from "./hooks";
+import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
 import { t as strings } from "./content";
 import Motion from "./Motion";
 import "./app.css";
@@ -23,6 +23,7 @@ function AuroraBg() {
 function Nav() {
   const [theme, toggleTheme] = useTheme();
   const { lang, setLang } = useLang();
+  const [soundOn, toggleSound] = useSound();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -32,18 +33,22 @@ function Nav() {
   return (
     <header className={`nav${scrolled ? " solid" : ""}`}>
       <div className="container nav-inner">
-        <a href="#top" className="brand">JC<span>.</span></a>
+        <a href="#top" className="brand" data-cuelume-hover="tick">JC<span>.</span></a>
         <nav className="nav-links" aria-label="Primary">
-          <a href="#work">{tr(strings.nav.work, lang)}</a>
-          <a href="#skills">{tr(strings.nav.skills, lang)}</a>
-          <a href="#about">{tr(strings.nav.about, lang)}</a>
-          <a href="#contact">{tr(strings.nav.contact, lang)}</a>
-          <a href="#/lab" className="nav-lab">{tr(strings.nav.lab, lang)} ✦</a>
+          <a href="#work" data-cuelume-hover="tick">{tr(strings.nav.work, lang)}</a>
+          <a href="#skills" data-cuelume-hover="tick">{tr(strings.nav.skills, lang)}</a>
+          <a href="#about" data-cuelume-hover="tick">{tr(strings.nav.about, lang)}</a>
+          <a href="#contact" data-cuelume-hover="tick">{tr(strings.nav.contact, lang)}</a>
+          <a href="#/lab" className="nav-lab" data-cuelume-hover="sparkle">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>
         <div className="nav-actions">
+          <button className={`pill${soundOn ? " on" : ""}`} onClick={toggleSound}
+            aria-label={lang === "es" ? "Alternar sonido" : "Toggle sound"} aria-pressed={soundOn}
+            title={lang === "es" ? "Sonidos de interacción (cuelume)" : "Interaction sounds (cuelume)"}>
+            {soundOn ? "🔊" : "🔇"}</button>
           <button className="pill" onClick={() => setLang(lang === "es" ? "en" : "es")}
-            aria-label="Toggle language">{lang === "es" ? "EN" : "ES"}</button>
-          <button className="pill" onClick={toggleTheme} aria-label="Toggle theme">
+            aria-label="Toggle language" data-cuelume-toggle>{lang === "es" ? "EN" : "ES"}</button>
+          <button className="pill" onClick={toggleTheme} aria-label="Toggle theme" data-cuelume-toggle>
             {theme === "dark" ? "☀" : "☾"}</button>
         </div>
       </div>
@@ -103,8 +108,8 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.16 }}>{tr(strings.hero.lead, lang)}</motion.p>
         <motion.div className="hero-cta" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.24 }}>
-          <a className="btn primary" href="#work">{tr(strings.hero.ctaWork, lang)} →</a>
-          <a className="btn" href={GITHUB} target="_blank" rel="noreferrer">{tr(strings.hero.ctaGithub, lang)}</a>
+          <a className="btn primary" href="#work" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaWork, lang)} →</a>
+          <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaGithub, lang)}</a>
         </motion.div>
         <Stats />
       </div>
@@ -146,7 +151,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const shot = `${BASE}screenshots/${project.key}/${project.shots[active]}`;
   return (
     <Reveal delay={index * 60}>
-      <article className={`project card${project.featured ? " featured" : ""}`}>
+      <article className={`project card${project.featured ? " featured" : ""}`} data-cuelume-hover="chime">
         <div className="project-media">
           <img src={shot} alt={`${project.name} screenshot`} loading="lazy"
             onError={(e) => ((e.target as HTMLImageElement).style.opacity = "0.12")} />
@@ -292,9 +297,9 @@ function Contact() {
             <h2 className="section-title">{tr(strings.contact.title, lang)}</h2>
             <p className="section-lead">{tr(strings.contact.lead, lang)}</p>
             <div className="contact-actions">
-              <a className="btn primary" href="mailto:jcuadradoh2@unemi.edu.ec">{tr(strings.contact.email, lang)} →</a>
-              <a className="btn" href={GITHUB} target="_blank" rel="noreferrer">GitHub</a>
-              <a className="btn" href="https://www.linkedin.com/in/jcuadradoh2" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a className="btn primary" href="mailto:jcuadradoh2@unemi.edu.ec" data-cuelume-press data-cuelume-release>{tr(strings.contact.email, lang)} →</a>
+              <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>GitHub</a>
+              <a className="btn" href="https://www.linkedin.com/in/jcuadradoh2" target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>LinkedIn</a>
             </div>
           </div>
         </Reveal>
