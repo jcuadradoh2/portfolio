@@ -10,8 +10,10 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
       <Routes>
-        <Route path="/" element={<App />} />
         <Route path="/lab" element={<Lab />} />
+        {/* Home for "/" and any in-page section hash (#contact, #work, …) so a
+            direct/bookmarked section link never lands on a blank no-match. */}
+        <Route path="*" element={<App />} />
       </Routes>
     </HashRouter>
   </StrictMode>,

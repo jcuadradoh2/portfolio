@@ -9,6 +9,13 @@ import "./app.css";
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
 
+// Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
+// "#contact" hash would be read by HashRouter as a route and unmount the app.
+function scrollToId(e: React.MouseEvent, id: string) {
+  e.preventDefault();
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function AuroraBg() {
   return (
     <div className="aurora" aria-hidden="true">
@@ -33,12 +40,12 @@ function Nav() {
   return (
     <header className={`nav${scrolled ? " solid" : ""}`}>
       <div className="container nav-inner">
-        <a href="#top" className="brand" data-cuelume-hover="tick">JC<span>.</span></a>
+        <a href="#top" className="brand" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "top")}>JC<span>.</span></a>
         <nav className="nav-links" aria-label="Primary">
-          <a href="#work" data-cuelume-hover="tick">{tr(strings.nav.work, lang)}</a>
-          <a href="#skills" data-cuelume-hover="tick">{tr(strings.nav.skills, lang)}</a>
-          <a href="#about" data-cuelume-hover="tick">{tr(strings.nav.about, lang)}</a>
-          <a href="#contact" data-cuelume-hover="tick">{tr(strings.nav.contact, lang)}</a>
+          <a href="#work" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "work")}>{tr(strings.nav.work, lang)}</a>
+          <a href="#skills" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "skills")}>{tr(strings.nav.skills, lang)}</a>
+          <a href="#about" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "about")}>{tr(strings.nav.about, lang)}</a>
+          <a href="#contact" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "contact")}>{tr(strings.nav.contact, lang)}</a>
           <a href="#/lab" className="nav-lab" data-cuelume-hover="sparkle">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>
         <div className="nav-actions">
@@ -312,6 +319,13 @@ function Contact() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const id = window.location.hash.replace(/^#\/?/, "");
+    if (id && id !== "lab") {
+      const el = document.getElementById(id);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 120);
+    }
+  }, []);
   return (
     <AppProviders>
       <Nav />
