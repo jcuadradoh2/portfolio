@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid } from "lucide-react";
 import { motion } from "framer-motion";
 import { projects, skillGroups, timeline, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
@@ -15,6 +16,16 @@ function scrollToId(e: React.MouseEvent, id: string) {
   e.preventDefault();
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Per-category accent + icon (squoosh-style vivid palette) — index-aligned with skillGroups.
+const SKILL_STYLE = [
+  { c: "#4361ee", Icon: Server },
+  { c: "#b5179e", Icon: Sparkles },
+  { c: "#06b6d4", Icon: Database },
+  { c: "#f59e0b", Icon: Cloud },
+  { c: "#f72585", Icon: Zap },
+  { c: "#10b981", Icon: LayoutGrid },
+];
 
 function AuroraBg() {
   return (
@@ -227,14 +238,22 @@ function Skills() {
           <p className="section-lead">{tr(strings.skills.lead, lang)}</p>
         </Reveal>
         <div className="skills">
-          {skillGroups.map((g, i) => (
-            <Reveal key={i} delay={i * 50}>
-              <div className="skill-card card">
-                <h4>{tr(g.title, lang)}</h4>
-                <ul>{g.items.map((it) => <li key={it}>{it}</li>)}</ul>
-              </div>
-            </Reveal>
-          ))}
+          {skillGroups.map((g, i) => {
+            const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
+            return (
+              <Reveal key={i} delay={i * 50}>
+                <div className="skill-card card" style={{ "--c": c } as CSSProperties}>
+                  <div className="skill-head">
+                    <span className="skill-badge"><Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
+                    <h4>{tr(g.title, lang)}</h4>
+                  </div>
+                  <div className="skill-chips">
+                    {g.items.map((it) => <span className="skill-chip" key={it}>{it}</span>)}
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
