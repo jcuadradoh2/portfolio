@@ -6,6 +6,7 @@ export const t = {
     skills: { es: "Skills", en: "Skills" },
     about: { es: "Perfil", en: "About" },
     contact: { es: "Contacto", en: "Contact" },
+    lab: { es: "Lab", en: "Lab" },
   },
   hero: {
     role: { es: "Ingeniero de Software Full-Stack · Senior", en: "Senior Full-Stack Software Engineer" },

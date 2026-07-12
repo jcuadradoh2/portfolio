@@ -1,0 +1,74 @@
+.lab {
+  background: #0a0d18;
+  color: #eef1fb;
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.lab-back {
+  position: fixed; top: 18px; right: 18px; z-index: 200;
+  font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px;
+  background: rgba(10, 13, 24, 0.6); border: 1px solid rgba(140, 160, 255, 0.3);
+  color: #fff; backdrop-filter: blur(8px); transition: 0.15s;
+}
+.lab-back:hover { border-color: #5b8cff; transform: translateY(-1px); }
+
+.lab-head { max-width: 760px; margin: 0 auto; padding: 100px 24px 40px; text-align: center; }
+.lab-eyebrow { font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: #17c8b4; margin: 0 0 14px; }
+.lab-head h1 { font-family: "Space Grotesk", sans-serif; font-size: clamp(30px, 5vw, 52px);
+  font-weight: 700; letter-spacing: -0.03em; margin: 0 0 18px; }
+.lab-lead { color: #99a2c2; font-size: 18px; line-height: 1.6; }
+
+.lab-section { max-width: 1000px; margin: 0 auto; padding: 56px 24px; }
+.lab-tag { font-family: "Space Grotesk", sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #5b8cff; margin-bottom: 12px; }
+.lab-section h2 { font-family: "Space Grotesk", sans-serif; font-size: clamp(24px, 3.4vw, 36px);
+  font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+.lab-desc { color: #99a2c2; font-size: 16px; line-height: 1.65; max-width: 640px; margin: 0 0 28px; }
+.lab-desc a { color: #5b8cff; }
+.lab-desc code { font-family: ui-monospace, monospace; font-size: 14px; color: #17c8b4;
+  background: rgba(23, 200, 180, 0.1); padding: 2px 6px; border-radius: 6px; }
+
+.player-frame { border-radius: 16px; overflow: hidden; border: 1px solid rgba(140, 160, 255, 0.2);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55); }
+
+.lab-foot { text-align: center; padding: 60px 24px 90px; }
+.lab-foot a { font-family: "Space Grotesk", sans-serif; font-weight: 600; color: #5b8cff; }
+
+/* ---------- Pulse 3D ---------- */
+.pulse-stage { display: flex; flex-direction: column; align-items: center; gap: 22px;
+  padding: 40px 0; perspective: 900px; }
+.pulse-scene { position: relative; width: 320px; height: 320px; transform-style: preserve-3d;
+  transition: transform 0.15s ease-out; display: grid; place-items: center; }
+.pulse-glow { position: absolute; width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 140, 255, 0.55), transparent 65%);
+  filter: blur(30px); animation: pulseGlow 3.2s ease-in-out infinite; }
+.pulse-core { position: absolute; width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a7c3ff, #5b8cff 40%, #7b3ff2 75%, #2a1b57 100%);
+  box-shadow: inset -18px -22px 50px rgba(0, 0, 0, 0.55), 0 20px 60px rgba(91, 140, 255, 0.5);
+  animation: pulseCore 3.2s ease-in-out infinite; transform: translateZ(40px); }
+.pulse-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(150, 175, 255, 0.4); }
+.pulse-ring.r1 { width: 200px; height: 200px; animation: spin 9s linear infinite; }
+.pulse-ring.r2 { width: 250px; height: 250px; border-color: rgba(200, 107, 255, 0.35);
+  animation: spin 13s linear infinite reverse; }
+.pulse-ring.r3 { width: 300px; height: 300px; border-color: rgba(23, 200, 180, 0.3);
+  animation: spin 17s linear infinite; }
+.pulse-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #17c8b4;
+  box-shadow: 0 0 10px #17c8b4; animation: orbit 11s linear infinite;
+  animation-delay: calc(var(--i) * -0.785s); }
+.pulse-hint { font-size: 13px; color: #6b7395; font-family: "Space Grotesk", sans-serif; }
+
+@keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.12); } }
+@keyframes pulseCore { 0%, 100% { transform: translateZ(40px) scale(1); } 50% { transform: translateZ(40px) scale(1.08); } }
+@keyframes spin { from { transform: rotateX(74deg) rotateZ(0); } to { transform: rotateX(74deg) rotateZ(360deg); } }
+@keyframes orbit {
+  from { transform: rotateX(74deg) rotateZ(0) translateX(125px); }
+  to { transform: rotateX(74deg) rotateZ(360deg) translateX(125px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-glow, .pulse-core, .pulse-ring, .pulse-dot { animation: none; }
+  .pulse-scene { transition: none; }
+}

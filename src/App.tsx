@@ -37,6 +37,7 @@ function Nav() {
           <a href="#skills">{tr(strings.nav.skills, lang)}</a>
           <a href="#about">{tr(strings.nav.about, lang)}</a>
           <a href="#contact">{tr(strings.nav.contact, lang)}</a>
+          <a href="#/lab" className="nav-lab">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>
         <div className="nav-actions">
           <button className="pill" onClick={() => setLang(lang === "es" ? "en" : "es")}
@@ -185,6 +186,22 @@ function Skills() {
   );
 }
 
+function Avatar() {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return <div className="about-photo about-photo--fallback" aria-hidden="true">JC</div>;
+  }
+  return (
+    <img
+      className="about-photo"
+      src={`${BASE}jefferson.jpg`}
+      alt="Jefferson Cuadrado"
+      onError={() => setFailed(true)}
+      loading="lazy"
+    />
+  );
+}
+
 function About() {
   const { lang } = useLang();
   return (
@@ -192,8 +209,14 @@ function About() {
       <div className="container about-grid">
         <Reveal>
           <div>
-            <p className="eyebrow">{tr(strings.about.eyebrow, lang)}</p>
-            <h2 className="section-title">{tr(strings.about.title, lang)}</h2>
+            <div className="about-head">
+              <Avatar />
+              <div>
+                <p className="eyebrow">{tr(strings.about.eyebrow, lang)}</p>
+                <h2 className="section-title" style={{ marginBottom: 0 }}>{tr(strings.about.title, lang)}</h2>
+                <p className="about-role">Senior Full-Stack Engineer · Ecuador 🇪🇨</p>
+              </div>
+            </div>
             <p className="about-body">{tr(strings.about.body, lang)}</p>
           </div>
         </Reveal>
