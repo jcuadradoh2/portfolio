@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { projects, skillGroups, timeline, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useTheme } from "./hooks";
 import { t as strings } from "./content";
+import Motion from "./Motion";
 import "./app.css";
 
 const BASE = import.meta.env.BASE_URL;
@@ -52,9 +53,47 @@ function Nav() {
 
 function Hero() {
   const { lang } = useLang();
+  const sectionRef = useRef<HTMLElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const spot = spotRef.current;
+    if (!section || !spot) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const target = { x: -999, y: -999 };
+    const cur = { x: -999, y: -999 };
+    let active = false;
+    const onMove = (e: MouseEvent) => {
+      const r = section.getBoundingClientRect();
+      target.x = e.clientX - r.left;
+      target.y = e.clientY - r.top;
+      active = true;
+    };
+    const onLeave = () => { active = false; };
+    section.addEventListener("mousemove", onMove);
+    section.addEventListener("mouseleave", onLeave);
+    let raf = 0;
+    const loop = () => {
+      cur.x += (target.x - cur.x) * 0.14;
+      cur.y += (target.y - cur.y) * 0.14;
+      spot.style.setProperty("--mx", `${cur.x}px`);
+      spot.style.setProperty("--my", `${cur.y}px`);
+      spot.style.opacity = active ? "1" : "0";
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => {
+      section.removeEventListener("mousemove", onMove);
+      section.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section id="top" className="hero">
+    <section id="top" className="hero" ref={sectionRef}>
       <AuroraBg />
+      <div className="hero-spotlight" ref={spotRef} aria-hidden="true" />
       <div className="container hero-inner">
         <motion.p className="eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}>{tr(strings.hero.role, lang)}</motion.p>
@@ -194,7 +233,7 @@ function Avatar() {
   return (
     <img
       className="about-photo"
-      src={`${BASE}jefferson.jpg`}
+      src={`${BASE}jefferson.png`}
       alt="Jefferson Cuadrado"
       onError={() => setFailed(true)}
       loading="lazy"
@@ -270,6 +309,7 @@ export default function App() {
       <main>
         <Hero />
         <Work />
+        <Motion />
         <Skills />
         <About />
         <Contact />
