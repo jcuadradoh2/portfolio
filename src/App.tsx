@@ -253,7 +253,7 @@ function About() {
               <div>
                 <p className="eyebrow">{tr(strings.about.eyebrow, lang)}</p>
                 <h2 className="section-title" style={{ marginBottom: 0 }}>{tr(strings.about.title, lang)}</h2>
-                <p className="about-role">Senior Full-Stack Engineer · Ecuador 🇪🇨</p>
+                <p className="about-role">{tr(strings.about.role, lang)}</p>
               </div>
             </div>
             <p className="about-body">{tr(strings.about.body, lang)}</p>
@@ -288,9 +288,9 @@ function Contact() {
             <h2 className="section-title">{tr(strings.contact.title, lang)}</h2>
             <p className="section-lead">{tr(strings.contact.lead, lang)}</p>
             <div className="contact-actions">
-              <a className="btn primary" href="mailto:jcuadradoh6@gmail.com">{tr(strings.contact.email, lang)} →</a>
+              <a className="btn primary" href="mailto:jcuadradoh2@unemi.edu.ec">{tr(strings.contact.email, lang)} →</a>
               <a className="btn" href={GITHUB} target="_blank" rel="noreferrer">GitHub</a>
-              <a className="btn" href="https://www.linkedin.com/in/jefferson-cuadrado" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a className="btn" href="https://www.linkedin.com/in/jcuadradoh2" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
           </div>
         </Reveal>

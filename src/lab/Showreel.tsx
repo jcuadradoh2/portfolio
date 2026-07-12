@@ -45,7 +45,7 @@ function Intro() {
           Jefferson Cuadrado
         </div>
         <div style={{ marginTop: 10, fontSize: 30, color: "#17c8b4", opacity: sub, fontWeight: 600 }}>
-          Senior Full-Stack Engineer
+          Backend Python/Django · IA Aplicada
         </div>
       </div>
     </AbsoluteFill>

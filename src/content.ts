@@ -9,21 +9,22 @@ export const t = {
     lab: { es: "Lab", en: "Lab" },
   },
   hero: {
-    role: { es: "Ingeniero de Software Full-Stack · Senior", en: "Senior Full-Stack Software Engineer" },
+    role: { es: "Desarrollador de Software · Backend Python/Django · IA Aplicada",
+            en: "Software Developer · Python/Django Backend · Applied AI" },
     title: { es: "Construyo sistemas backend robustos e interfaces que se sienten bien.",
              en: "I build robust backend systems and interfaces that feel right." },
     lead: {
-      es: "Más de una década construyendo un ERP académico real: OCR con IA, firma electrónica, pasarelas de pago, integraciones SOAP/Moodle y concurrencia a escala. Este portafolio consolida ese trabajo — reescrito, sanitizado y ejecutable.",
-      en: "A decade building a real academic ERP: AI-driven OCR, electronic signatures, payment gateways, SOAP/Moodle integrations and concurrency at scale. This portfolio consolidates that work — rewritten, sanitized and runnable.",
+      es: "Más de 4 años construyendo backends con Python, Django y FastAPI para instituciones de educación superior: IA aplicada (LLMs, agentes, OCR con Document AI), automatización de procesos, observabilidad con Sentry e integraciones. Este portafolio consolida y demuestra ese trabajo — reescrito, sanitizado y ejecutable.",
+      en: "4+ years building backends with Python, Django and FastAPI for higher-education institutions: applied AI (LLMs, agents, Document AI OCR), process automation, Sentry observability and integrations. This portfolio consolidates and demonstrates that work — rewritten, sanitized and runnable.",
     },
     ctaWork: { es: "Ver proyectos", en: "View projects" },
     ctaGithub: { es: "GitHub", en: "GitHub" },
   },
   stats: [
-    { value: "10+", label: { es: "años construyendo software", en: "years shipping software" } },
+    { value: "4+", label: { es: "años de experiencia", en: "years of experience" } },
     { value: "5", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
     { value: "61", label: { es: "tests automatizados", en: "automated tests" } },
-    { value: "4", label: { es: "lenguajes en producción", en: "languages in production" } },
+    { value: "MSc", label: { es: "Magíster en TI", en: "MSc in IT" } },
   ],
   work: {
     eyebrow: { es: "Proyectos destacados", en: "Featured work" },
@@ -45,9 +46,11 @@ export const t = {
   about: {
     eyebrow: { es: "Perfil", en: "About" },
     title: { es: "Jefferson Cuadrado", en: "Jefferson Cuadrado" },
+    role: { es: "Desarrollador de Software · Backend Python/Django · IA Aplicada · Ecuador 🇪🇨",
+            en: "Software Developer · Python/Django Backend · Applied AI · Ecuador 🇪🇨" },
     body: {
-      es: "Desarrollador full-stack de Ecuador. Durante años construí y mantuve el sistema de gestión académica de una universidad — decenas de módulos, integraciones con entidades del Estado, firma electrónica con HSM, pagos en línea y automatizaciones críticas. Me gusta la arquitectura limpia (hexagonal, DDD), la concurrencia bien hecha y las interfaces accesibles. Este portafolio recupera ese trabajo que nunca estuvo en un solo lugar.",
-      en: "Full-stack developer from Ecuador. For years I built and maintained a university's academic-management system — dozens of modules, government integrations, HSM electronic signatures, online payments and critical automations. I care about clean architecture (hexagonal, DDD), concurrency done right, and accessible interfaces. This portfolio recovers work that was never in one place.",
+      es: "Ingeniero en Sistemas Computacionales y Magíster en Tecnologías de la Información (mención Transformación Digital e Innovación) por la UNEMI. Más de 4 años en desarrollo backend y automatización de procesos institucionales: módulos de gestión académica, pipelines de OCR con Google Document AI para admisión, integración de LLMs y agentes inteligentes, notificaciones automatizadas y observabilidad con Sentry. Me enfocan la arquitectura por capas, la calidad y la entrega iterativa. Este portafolio consolida ese trabajo — reescrito y sanitizado.",
+      en: "Computer Systems Engineer and MSc in Information Technology (Digital Transformation & Innovation) from UNEMI. 4+ years in backend development and institutional process automation: academic-management modules, OCR pipelines with Google Document AI for admissions, LLM integration and intelligent agents, automated notifications and Sentry observability. I focus on layered architecture, quality and iterative delivery. This portfolio consolidates that work — rewritten and sanitized.",
     },
     timelineTitle: { es: "Trayectoria", en: "Timeline" },
   },
@@ -144,19 +147,21 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  { title: { es: "Backend", en: "Backend" }, items: ["Java · Spring Boot", ".NET · C#", "Python · Django · DRF", "Node.js", "PHP · Laravel"] },
-  { title: { es: "Frontend", en: "Frontend" }, items: ["React", "Angular", "Vue", "TypeScript", "Tailwind · SCSS"] },
-  { title: { es: "Datos", en: "Data" }, items: ["PostgreSQL", "MySQL", "SQLite", "Redis", "ORM · optimización"] },
-  { title: { es: "Arquitectura", en: "Architecture" }, items: ["Hexagonal · DDD", "Concurrencia", "JWT · OAuth2", "REST · SOAP", "KISS · DRY"] },
-  { title: { es: "IA & Cloud", en: "AI & Cloud" }, items: ["Claude API · agentes", "OCR · Document AI", "Docker", "GCP", "CI/CD"] },
-  { title: { es: "Prácticas", en: "Practices" }, items: ["Testing", "Web scraping", "Firma electrónica", "Accesibilidad", "UX/UI"] },
+  { title: { es: "Backend & APIs", en: "Backend & APIs" }, items: ["Python · Django · DRF", "FastAPI", "Java · Spring Boot", "Celery · Redis", "REST · SOLID"] },
+  { title: { es: "IA Aplicada & LLMs", en: "Applied AI & LLMs" }, items: ["OpenAI API · Ollama", "Agentes inteligentes", "Visión multimodal", "Document AI · OCR", "PaddleOCR"] },
+  { title: { es: "Datos & Analítica", en: "Data & Analytics" }, items: ["PostgreSQL", "SQL avanzado", "Pandas", "Apache Superset", "Modelado de datos"] },
+  { title: { es: "DevOps & Cloud", en: "DevOps & Cloud" }, items: ["Docker · Git", "CI/CD · Linux · Nginx", "GCP · Azure", "Sentry", "Gunicorn · Uvicorn"] },
+  { title: { es: "Automatización", en: "Automation" }, items: ["Telegram · webhooks", "Celery (async)", "Moodle", "Integración de sistemas"] },
+  { title: { es: "Frontend & Procesos", en: "Frontend & Process" }, items: ["React · Svelte", "TypeScript · JS", "Bootstrap · CSS3", "BPMN · Scrum"] },
 ];
 
 export const timeline = [
-  { period: "2015 — 2018", title: { es: "Desarrollador Full-Stack", en: "Full-Stack Developer" },
-    body: { es: "Aplicaciones web, móviles e integraciones. PHP/Laravel, Django, Vue.", en: "Web & mobile apps and integrations. PHP/Laravel, Django, Vue." } },
-  { period: "2018 — 2024", title: { es: "Ingeniero SGA — ERP académico", en: "SGA Engineer — Academic ERP" },
-    body: { es: "Construcción y mantenimiento de un sistema de gestión académica: matrícula, finanzas, pagos en línea, firma electrónica con HSM, integraciones estatales (Senescyt), Moodle y reportería.", en: "Built and maintained an academic-management system: enrollment, finance, online payments, HSM e-signatures, government integrations (Senescyt), Moodle and reporting." } },
-  { period: "2024 — hoy", title: { es: "Senior Full-Stack", en: "Senior Full-Stack" },
-    body: { es: "Arquitectura hexagonal, IA aplicada (OCR, agentes), concurrencia y consolidación de este portafolio.", en: "Hexagonal architecture, applied AI (OCR, agents), concurrency, and consolidating this portfolio." } },
+  { period: "Feb 2026 — Actualidad", title: { es: "Programador Semi Senior — WhistleCorp S.A.S", en: "Semi-Senior Developer — WhistleCorp S.A.S" },
+    body: { es: "Backend a medida con Python, Django, DRF y FastAPI para gestión académica. Pipeline de OCR con Document AI (admisión), integración de LLMs y Ollama con visión multimodal, agentes inteligentes, observabilidad con Sentry y despliegue en GCP/Azure.", en: "Custom backends with Python, Django, DRF and FastAPI for academic management. Document AI OCR pipeline (admissions), LLM + Ollama multimodal integration, intelligent agents, Sentry observability and GCP/Azure deployment." } },
+  { period: "2023 — 2026", title: { es: "Desarrollador de Software — UNEMI", en: "Software Developer — UNEMI" },
+    body: { es: "Módulos de seguimiento académico y reportería, automatización de distributivos docentes, integración con Moodle, IA aplicada a procesos educativos, reportes para POA y acreditación. Java (Spring Boot), Django, Svelte, React.", en: "Academic-tracking and reporting modules, teaching-load automation, Moodle integration, applied AI for education, accreditation reports. Java (Spring Boot), Django, Svelte, React." } },
+  { period: "2022 — 2023", title: { es: "Desarrollador de Software — EPUNEMI", en: "Software Developer — EPUNEMI" },
+    body: { es: "Digitalización de servicios de UNEMI Posgrados; lideré el sistema de selección docente de posgrado. Python (Django, DRF), Svelte, PostgreSQL.", en: "Digitized UNEMI Graduate School services; led the postgraduate faculty-selection system. Python (Django, DRF), Svelte, PostgreSQL." } },
+  { period: "2019 — 2021", title: { es: "Técnico de Soporte de Redes N2 — Interman", en: "Network Support Technician N2 — Interman" },
+    body: { es: "Diseño y mantenimiento de redes LAN/WAN, configuración de equipos CISCO y soporte de segundo nivel.", en: "LAN/WAN network design and maintenance, CISCO device configuration and second-level support." } },
 ];
