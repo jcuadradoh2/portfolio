@@ -174,3 +174,5 @@
 .showreel-frame > * { display: block; }
 
 @media (max-width: 820px) { .robot-hint { display: none; } }
+
+.project-private { color: var(--text-dim); cursor: default; }
