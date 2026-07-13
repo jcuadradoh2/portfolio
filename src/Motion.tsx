@@ -3,8 +3,11 @@ import { Player } from "@remotion/player";
 import { SHOWREEL_CONFIG, Showreel } from "./lab/Showreel";
 import { tr, useLang } from "./hooks";
 
-const ROBOT_MP4 =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260601_110537_3a579fa0-7bbc-4d94-9d25-0e816c7840f5.mp4";
+// Bundled same-origin, re-encoded to 720p all-keyframes (every frame an I-frame).
+// The earlier lag was a 4K clip with sparse keyframes: each cursor-driven seek had
+// to decode a whole GOP. All-intra + 720p makes every seek a single-frame decode,
+// so scrubbing tracks the cursor fluidly. Source: tools re-encode of the original.
+const ROBOT_MP4 = "/robot.mp4";
 
 const copy = {
   eyebrow: { es: "Motion & Interacción", en: "Motion & Interaction" },
@@ -25,8 +28,8 @@ const copy = {
 
 // Cursor-driven video scrubbing via seek-chaining: on each 'seeked' we jump to
 // the latest target only if it changed, so we never queue seeks faster than the
-// decoder can serve them (the source of the earlier lag). Mobile / reduced-motion
-// fall back to normal looped autoplay.
+// decoder can serve them. With the all-intra 720p clip each seek is a single-frame
+// decode, so this stays fluid. Mobile / reduced-motion fall back to looped autoplay.
 function useVideoScrub(sectionRef: React.RefObject<HTMLElement | null>, videoRef: React.RefObject<HTMLVideoElement | null>) {
   useEffect(() => {
     const section = sectionRef.current;
@@ -46,6 +49,8 @@ function useVideoScrub(sectionRef: React.RefObject<HTMLElement | null>, videoRef
     let lastReq = -1;
     let ready = false;
     let seeking = false;
+    let raf = 0;
+    let rafPending = false;
 
     const applySeek = () => {
       if (!ready || !video.duration) return;
@@ -59,7 +64,9 @@ function useVideoScrub(sectionRef: React.RefObject<HTMLElement | null>, videoRef
       const r = section.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
       target = p * (video.duration || 0);
-      if (!seeking) applySeek();
+      if (rafPending) return;
+      rafPending = true;
+      raf = requestAnimationFrame(() => { rafPending = false; if (!seeking) applySeek(); });
     };
     const onReady = () => {
       ready = true;
@@ -75,6 +82,7 @@ function useVideoScrub(sectionRef: React.RefObject<HTMLElement | null>, videoRef
     else video.addEventListener("loadeddata", onReady, { once: true });
 
     return () => {
+      cancelAnimationFrame(raf);
       video.removeEventListener("seeked", onSeeked);
       section.removeEventListener("mousemove", onMove);
     };
