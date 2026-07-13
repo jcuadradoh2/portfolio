@@ -196,13 +196,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="project-tags">
             {project.tags.map((tag) => <span key={tag} className="tag">{tag}</span>)}
           </div>
-          {project.private ? (
-            <span className="project-link project-private">🔒 {lang === "es" ? "Repositorio privado" : "Private repository"}</span>
-          ) : (
-            <a className="project-link" href={project.repo} target="_blank" rel="noreferrer">
-              {tr(strings.work.view, lang)} ↗
-            </a>
-          )}
+          <div className="project-links">
+            {project.private ? (
+              <span className="project-link project-private">🔒 {lang === "es" ? "Repositorio privado" : "Private repository"}</span>
+            ) : (
+              <a className="project-link" href={project.repo} target="_blank" rel="noreferrer">
+                {tr(strings.work.view, lang)} ↗
+              </a>
+            )}
+            {project.paper && (
+              <a className="project-link" href={project.paper} target="_blank" rel="noreferrer">
+                {lang === "es" ? "Ver tesis" : "View thesis"} ↗
+              </a>
+            )}
+          </div>
         </div>
       </article>
     </Reveal>

@@ -77,6 +77,7 @@ export interface Project {
   repo: string;
   shots: string[];
   private?: boolean;
+  paper?: string;
 }
 
 export const projects: Project[] = [
@@ -146,17 +147,18 @@ export const projects: Project[] = [
     shots: ["hero-dark.png", "tokens-dark.png", "components-dark.png"],
   },
   {
-    key: "svplatform",
-    name: "SVPlatform",
-    tagline: { es: "Plataforma ERP empresarial", en: "Enterprise ERP platform" },
+    key: "nexo",
+    name: "Nexo ERP",
+    tagline: { es: "Control de acceso residencial · web + móvil", en: "Residential access control · web + mobile" },
     description: {
-      es: "Plataforma de administración empresarial (Laravel + Vue SPA) con módulo de Seguridad —RBAC completo: usuarios, roles, permisos, módulos, grupos y departamentos— y módulo de Contabilidad —flujo de caja, mantenimientos (productos, clientes, proveedores) y transacciones—. Autenticación JWT y LDAP/Active Directory, notificaciones en tiempo real con WebSockets, generación de PDF/códigos de barra e impresión térmica (POS), exportación a Excel e integración SAP/ODBC.",
-      en: "Enterprise administration platform (Laravel + Vue SPA) with a Security module —full RBAC: users, roles, permissions, modules, groups, departments— and an Accounting module —cash flow, master-data CRUD (products, clients, suppliers) and transactions—. JWT + LDAP/Active Directory auth, real-time notifications over WebSockets, PDF/barcode generation and thermal (POS) printing, Excel export and SAP/ODBC integration.",
+      es: "Proyecto de titulación (UNEMI, 2022) co-desarrollado con Israel Zambrano: aplicación móvil + sistema web para gestionar el ingreso de visitas a la urbanización «La Gema» (Guayaquil). Los visitantes acceden con un código QR validado en garita; la administración gestiona residentes, usuarios, roles y permisos (RBAC) y la bitácora de accesos. Construido sobre una base ERP en Laravel + Vue.js (SPA) con PostgreSQL, autenticación JWT y generación de PDF/códigos QR.",
+      en: "Capstone thesis (UNEMI, 2022) co-developed with Israel Zambrano: a mobile app + web system to manage visitor entry to the “La Gema” gated community (Guayaquil). Visitors get in with a QR code validated at the gate; administrators manage residents, users, roles and permissions (RBAC) and the access log. Built on a Laravel + Vue.js (SPA) ERP base with PostgreSQL, JWT auth and PDF/QR generation.",
     },
-    tags: ["Laravel", "Vue 2 · Vuex", "PostgreSQL", "JWT", "WebSockets", "RBAC"],
+    tags: ["Laravel", "Vue.js", "PostgreSQL", "JWT · RBAC", "App móvil · QR", "Tesis UNEMI 2022"],
     featured: false,
-    repo: "https://github.com/jcuadradoh2/svplatform",
+    repo: "https://github.com/jcuadradoh2/nexo-erp",
     private: true,
+    paper: "https://repositorio.unemi.edu.ec/handle/123456789/6360",
     shots: ["dashboard-mock.png"],
   },
   {
@@ -185,7 +187,7 @@ export const skillGroups = [
 
 export const timeline = [
   { period: "2024 — Actualidad", title: { es: "Programador Full-Stack Senior — Freelance", en: "Senior Full-Stack Developer — Freelance" },
-    body: { es: "Diseño y desarrollo de plataformas web y apps móviles para clientes: backends con Django/Laravel, frontends en React/Vue/Angular/Flutter, IA aplicada y despliegue en la nube. Proyectos como SVPlatform (ERP), dashboards analíticos y apps de comercio.", en: "Design and development of web platforms and mobile apps for clients: Django/Laravel backends, React/Vue/Angular/Flutter frontends, applied AI and cloud deployment. Projects such as SVPlatform (ERP), analytics dashboards and e-commerce apps." } },
+    body: { es: "Diseño y desarrollo de plataformas web y apps móviles para clientes: backends con Django/Laravel, frontends en React/Vue/Angular/Flutter, IA aplicada y despliegue en la nube. Proyectos como dashboards analíticos, apps de comercio e integraciones a medida.", en: "Design and development of web platforms and mobile apps for clients: Django/Laravel backends, React/Vue/Angular/Flutter frontends, applied AI and cloud deployment. Projects such as analytics dashboards, e-commerce apps and custom integrations." } },
   { period: "Feb 2026 — Actualidad", title: { es: "Programador Semi Senior — WhistleCorp S.A.S", en: "Semi-Senior Developer — WhistleCorp S.A.S" },
     body: { es: "Backend a medida con Python, Django, DRF y FastAPI para gestión académica. Pipeline de OCR con Document AI (admisión), integración de LLMs y Ollama con visión multimodal, agentes inteligentes, observabilidad con Sentry y despliegue en GCP/Azure.", en: "Custom backends with Python, Django, DRF and FastAPI for academic management. Document AI OCR pipeline (admissions), LLM + Ollama multimodal integration, intelligent agents, Sentry observability and GCP/Azure deployment." } },
   { period: "2023 — 2026", title: { es: "Desarrollador de Software — UNEMI", en: "Software Developer — UNEMI" },
