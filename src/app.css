@@ -68,7 +68,6 @@ section[id] { scroll-margin-top: 72px; }
 .badge.gold { background: linear-gradient(135deg, var(--brand), var(--accent)); color: #fff; border: none; }
 .project-desc { color: var(--text-dim); font-size: 15px; flex: 1; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.project-links { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
 .project-link { font-family: var(--font-sans); font-weight: 600; color: var(--brand); width: fit-content; }
 .project-link:hover { text-decoration: underline; }
 @media (max-width: 820px) {
