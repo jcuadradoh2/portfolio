@@ -117,36 +117,23 @@ function ShowreelBand() {
   const playerRef = useRef<PlayerRef>(null);
   const frameRef = useRef<HTMLDivElement>(null);
 
-  // GIF-like: play whenever the showreel is on screen, pause when it leaves.
-  // apply() computes visibility itself (getBoundingClientRect) and is driven by
-  // scroll + resize + IntersectionObserver, plus a short startup poll — the
-  // Player's imperative handle isn't ready at mount, so we re-apply until it is.
-  // Composition has no audio, so play() isn't gated by the autoplay policy.
   useEffect(() => {
     const el = frameRef.current;
     if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const apply = () => {
+    const set = (visible: boolean) => {
       const player = playerRef.current;
       if (!player) return false;
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const shown = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-      const visible = r.height > 0 && shown / Math.min(r.height, vh) >= 0.35;
       try { if (visible) player.play(); else player.pause(); } catch { return false; }
       return true;
     };
-    const io = "IntersectionObserver" in window ? new IntersectionObserver(() => apply(), { threshold: [0, 0.35, 1] }) : null;
-    io?.observe(el);
-    window.addEventListener("scroll", apply, { passive: true });
-    window.addEventListener("resize", apply);
+    const io = new IntersectionObserver(([e]) => set(e.intersectionRatio >= 0.35), { threshold: [0, 0.35] });
+    io.observe(el);
     let tries = 0;
-    const poll = setInterval(() => { if ((apply() && playerRef.current) || ++tries > 50) clearInterval(poll); }, 100);
-    return () => {
-      io?.disconnect();
-      window.removeEventListener("scroll", apply);
-      window.removeEventListener("resize", apply);
-      clearInterval(poll);
-    };
+    const poll = setInterval(() => {
+      const r = el.getBoundingClientRect();
+      if (set(r.top < innerHeight && r.bottom > 0) || ++tries > 30) clearInterval(poll);
+    }, 100);
+    return () => { io.disconnect(); clearInterval(poll); };
   }, []);
 
   return (

@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
 import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid } from "lucide-react";
 import { motion } from "framer-motion";
 import { projects, skillGroups, timeline, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
 import { t as strings } from "./content";
-import Motion from "./Motion";
 import { TextReveal } from "./TextReveal";
 import "./app.css";
+
+const Motion = lazy(() => import("./Motion"));
 
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
@@ -88,6 +89,8 @@ function Hero() {
     const target = { x: -999, y: -999 };
     const cur = { x: -999, y: -999 };
     let active = false;
+    let raf = 0;
+    let running = false;
     const onMove = (e: MouseEvent) => {
       const r = section.getBoundingClientRect();
       target.x = e.clientX - r.left;
@@ -95,9 +98,6 @@ function Hero() {
       active = true;
     };
     const onLeave = () => { active = false; };
-    section.addEventListener("mousemove", onMove);
-    section.addEventListener("mouseleave", onLeave);
-    let raf = 0;
     const loop = () => {
       cur.x += (target.x - cur.x) * 0.14;
       cur.y += (target.y - cur.y) * 0.14;
@@ -106,10 +106,16 @@ function Hero() {
       spot.style.opacity = active ? "1" : "0";
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(loop); } };
+    const stop = () => { running = false; cancelAnimationFrame(raf); };
+    section.addEventListener("mousemove", onMove);
+    section.addEventListener("mouseleave", onLeave);
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0 });
+    io.observe(section);
     return () => {
       section.removeEventListener("mousemove", onMove);
       section.removeEventListener("mouseleave", onLeave);
+      io.disconnect();
       cancelAnimationFrame(raf);
     };
   }, []);
@@ -269,7 +275,7 @@ function Avatar() {
   return (
     <img
       className="about-photo"
-      src={`${BASE}jefferson.png`}
+      src={`${BASE}jefferson.webp`}
       alt="Jefferson Cuadrado"
       onError={() => setFailed(true)}
       loading="lazy"
@@ -352,7 +358,9 @@ export default function App() {
       <main>
         <Hero />
         <Work />
-        <Motion />
+        <Suspense fallback={<div style={{ minHeight: 900 }} />}>
+          <Motion />
+        </Suspense>
         <Skills />
         <About />
         <Contact />
