@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "render:showreel": "node scripts/render-showreel.mjs"
   },
   "dependencies": {
     "@remotion/player": "^4.0.489",
@@ -20,6 +21,9 @@
     "remotion": "^4.0.489"
   },
   "devDependencies": {
+    "@remotion/bundler": "^4.0.489",
+    "@remotion/google-fonts": "^4.0.489",
+    "@remotion/renderer": "^4.0.489",
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",

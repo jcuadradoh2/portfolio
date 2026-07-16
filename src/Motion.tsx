@@ -1,6 +1,4 @@
 import { useEffect, useRef } from "react";
-import { Player, type PlayerRef } from "@remotion/player";
-import { SHOWREEL_CONFIG, Showreel } from "./lab/Showreel";
 import { tr, useLang } from "./hooks";
 
 // Bundled same-origin, re-encoded to 720p all-keyframes (every frame an I-frame).
@@ -8,6 +6,7 @@ import { tr, useLang } from "./hooks";
 // to decode a whole GOP. All-intra + 720p makes every seek a single-frame decode,
 // so scrubbing tracks the cursor fluidly. Source: tools re-encode of the original.
 const ROBOT_MP4 = "/robot.mp4";
+const SHOWREEL_MP4 = "/showreel.mp4";
 
 const copy = {
   eyebrow: { es: "Motion & Interacción", en: "Motion & Interaction" },
@@ -114,26 +113,17 @@ function RobotBand() {
 
 function ShowreelBand() {
   const { lang } = useLang();
-  const playerRef = useRef<PlayerRef>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const el = frameRef.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const set = (visible: boolean) => {
-      const player = playerRef.current;
-      if (!player) return false;
-      try { if (visible) player.play(); else player.pause(); } catch { return false; }
-      return true;
-    };
-    const io = new IntersectionObserver(([e]) => set(e.intersectionRatio >= 0.35), { threshold: [0, 0.35] });
-    io.observe(el);
-    let tries = 0;
-    const poll = setInterval(() => {
-      const r = el.getBoundingClientRect();
-      if (set(r.top < innerHeight && r.bottom > 0) || ++tries > 30) clearInterval(poll);
-    }, 100);
-    return () => { io.disconnect(); clearInterval(poll); };
+    const v = videoRef.current;
+    if (!v || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(
+      ([e]) => (e.intersectionRatio >= 0.3 ? v.play().catch(() => {}) : v.pause()),
+      { threshold: [0, 0.3] },
+    );
+    io.observe(v);
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -142,19 +132,9 @@ function ShowreelBand() {
         <p className="eyebrow">{tr(copy.showEyebrow, lang)}</p>
         <h2 className="section-title">{tr(copy.showTitle, lang)}</h2>
         <p className="section-lead">{tr(copy.showLead, lang)}</p>
-        <div className="showreel-frame" ref={frameRef}>
-          <Player
-            ref={playerRef}
-            component={Showreel}
-            durationInFrames={SHOWREEL_CONFIG.durationInFrames}
-            fps={SHOWREEL_CONFIG.fps}
-            compositionWidth={SHOWREEL_CONFIG.width}
-            compositionHeight={SHOWREEL_CONFIG.height}
-            style={{ width: "100%" }}
-            initialFrame={45}
-            loop
-            clickToPlay={false}
-          />
+        <div className="showreel-frame">
+          <video ref={videoRef} src={SHOWREEL_MP4} muted loop playsInline preload="metadata"
+            aria-hidden="true" style={{ width: "100%", aspectRatio: "16 / 9" }} />
         </div>
       </div>
     </section>
