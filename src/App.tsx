@@ -5,6 +5,7 @@ import { projects, skillGroups, timeline, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
 import { t as strings } from "./content";
 import Motion from "./Motion";
+import { TextReveal } from "./TextReveal";
 import "./app.css";
 
 const BASE = import.meta.env.BASE_URL;
@@ -120,8 +121,8 @@ function Hero() {
       <div className="container hero-inner">
         <motion.p className="eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}>{tr(strings.hero.role, lang)}</motion.p>
-        <motion.h1 className="hero-title" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.08 }}>{tr(strings.hero.title, lang)}</motion.h1>
+        <TextReveal key={lang} as="h1" className="hero-title" per="word" preset="fade-in-blur"
+          speedReveal={1.1} delay={0.12}>{tr(strings.hero.title, lang)}</TextReveal>
         <motion.p className="hero-lead" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.16 }}>{tr(strings.hero.lead, lang)}</motion.p>
         <motion.div className="hero-cta" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
