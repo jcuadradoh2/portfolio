@@ -22,7 +22,7 @@ export const t = {
   },
   stats: [
     { value: "4+", label: { es: "años de experiencia", en: "years of experience" } },
-    { value: "7", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
+    { value: "8", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
     { value: "61", label: { es: "tests automatizados", en: "automated tests" } },
     { value: "MSc", label: { es: "Magíster en TI", en: "MSc in IT" } },
   ],
@@ -92,6 +92,19 @@ export const projects: Project[] = [
     featured: true,
     repo: "https://github.com/jcuadradoh2/agentforge",
     shots: ["chat-dark.png", "pipeline-dark.png", "login-dark.png"],
+  },
+  {
+    key: "telco",
+    name: "Telco Churn EDA",
+    tagline: { es: "Análisis exploratorio de datos (Data Science)", en: "Exploratory Data Analysis (Data Science)" },
+    description: {
+      es: "Pipeline EDA de punta a punta sobre 7,043 clientes de telecomunicaciones: detección de nulos disfrazados, imputación justificada, análisis univariado/bivariado, correlaciones y regla IQR. Hallazgos accionables de negocio (churn 52.9% en clientes nuevos vs 26.5% global) y README didáctico paso a paso. Base para modelo predictivo con scikit-learn.",
+      en: "End-to-end EDA pipeline over 7,043 telco customers: hidden-null detection, justified imputation, univariate/bivariate analysis, correlations and IQR rule. Actionable business findings (52.9% churn in new customers vs 26.5% overall) and a step-by-step educational README. Groundwork for a scikit-learn predictive model.",
+    },
+    tags: ["Python", "pandas", "seaborn", "EDA", "Data Science"],
+    featured: false,
+    repo: "https://github.com/jcuadradoh2/telco-churn-eda",
+    shots: ["churn-categorias.png", "tenure-densidad.png", "correlacion.png"],
   },
   {
     key: "jobradar",
