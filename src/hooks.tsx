@@ -13,7 +13,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
 }
 
 export const useLang = () => useContext(LangCtx);
-export const tr = (obj: { es: string; en: string }, lang: Lang) => obj[lang];
+export const tr = <T,>(obj: { es: T; en: T }, lang: Lang) => obj[lang];
 
 // Cuelume interaction sounds — the app owns the on/off preference (the library
 // itself doesn't persist). Default OFF so the site is silent until a visitor

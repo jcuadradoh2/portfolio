@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target } from "lucide-react";
 import { motion } from "framer-motion";
-import { projects, skillGroups, timeline, type Project } from "./content";
+import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
 import { t as strings } from "./content";
 import { TextReveal } from "./TextReveal";
@@ -27,6 +27,13 @@ const SKILL_STYLE = [
   { c: "#f59e0b", Icon: Cloud },
   { c: "#f72585", Icon: Zap },
   { c: "#10b981", Icon: LayoutGrid },
+];
+
+const HOW_STYLE = [
+  { c: "#4361ee", Icon: Boxes },
+  { c: "#f59e0b", Icon: Workflow },
+  { c: "#10b981", Icon: ShieldCheck },
+  { c: "#b5179e", Icon: Target },
 ];
 
 function AuroraBg() {
@@ -155,7 +162,7 @@ function Stats() {
   }, []);
   return (
     <div className="stats" ref={ref}>
-      {strings.stats.map((s, i) => <Stat key={i} value={s.value} label={tr(s.label, lang)} run={run} />)}
+      {strings.stats.map((s, i) => <Stat key={i} value={tr(s.value, lang)} label={tr(s.label, lang)} run={run} />)}
     </div>
   );
 }
@@ -167,6 +174,43 @@ function Stat({ value, label, run }: { value: string; label: string; run: boolea
       <div className="stat-value">{display}</div>
       <div className="stat-label">{label}</div>
     </div>
+  );
+}
+
+function PrincipleCard({ principle, index }: { principle: Principle; index: number }) {
+  const { lang } = useLang();
+  const { c, Icon } = HOW_STYLE[index % HOW_STYLE.length];
+  return (
+    <Reveal delay={index * 50}>
+      <div className="skill-card card" style={{ "--c": c } as CSSProperties}>
+        <div className="skill-head">
+          <span className="skill-badge"><Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
+          <div>
+            <h4>{tr(principle.title, lang)}</h4>
+            <p className="project-tagline">{tr(principle.subtitle, lang)}</p>
+          </div>
+        </div>
+        <p className="project-desc">{tr(principle.body, lang)}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+function HowIWork() {
+  const { lang } = useLang();
+  return (
+    <section id="how">
+      <div className="container">
+        <Reveal>
+          <p className="eyebrow">{tr(strings.how.eyebrow, lang)}</p>
+          <h2 className="section-title">{tr(strings.how.title, lang)}</h2>
+          <p className="section-lead">{tr(strings.how.lead, lang)}</p>
+        </Reveal>
+        <div className="skills how-grid">
+          {principles.map((p, i) => <PrincipleCard key={p.key} principle={p} index={i} />)}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -298,7 +342,7 @@ function About() {
                 <p className="about-role">{tr(strings.about.role, lang)}</p>
               </div>
             </div>
-            <p className="about-body">{tr(strings.about.body, lang)}</p>
+            {tr(strings.about.body, lang).map((p, i) => <p className="about-body" key={i}>{p}</p>)}
           </div>
         </Reveal>
         <Reveal delay={120}>
@@ -357,6 +401,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <HowIWork />
         <Work />
         <Suspense fallback={<div style={{ minHeight: 900 }} />}>
           <Motion />

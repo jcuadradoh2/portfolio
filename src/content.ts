@@ -9,23 +9,31 @@ export const t = {
     lab: { es: "Lab", en: "Lab" },
   },
   hero: {
-    role: { es: "Desarrollador de Software · Backend Python/Django · IA Aplicada",
-            en: "Software Developer · Python/Django Backend · Applied AI" },
-    title: { es: "Construyo sistemas backend robustos e interfaces que se sienten bien.",
-             en: "I build robust backend systems and interfaces that feel right." },
+    role: { es: "Ingeniero de Software · Arquitectura Backend · IA Aplicada",
+            en: "Software Engineer · Backend Architecture · Applied AI" },
+    title: { es: "Convierto procesos de negocio complejos en plataformas de software mantenibles.",
+             en: "I turn complex business processes into maintainable software platforms." },
     lead: {
-      es: "Más de 4 años construyendo backends con Python, Django y FastAPI para instituciones de educación superior: IA aplicada (LLMs, agentes, OCR con Document AI), automatización de procesos, observabilidad con Sentry e integraciones. Este portafolio consolida y demuestra ese trabajo — reescrito, sanitizado y ejecutable.",
-      en: "4+ years building backends with Python, Django and FastAPI for higher-education institutions: applied AI (LLMs, agents, Document AI OCR), process automation, Sentry observability and integrations. This portfolio consolidates and demonstrates that work — rewritten, sanitized and runnable.",
+      es: "He desarrollado plataformas para instituciones de educación superior donde la automatización, la inteligencia artificial y una arquitectura bien diseñada reducen el trabajo manual y permiten escalar procesos críticos. Mi experiencia combina backend, integración de IA, observabilidad y diseño de sistemas orientados a producción.",
+      en: "I have built platforms for higher-education institutions where automation, artificial intelligence and well-designed architecture cut manual work and let critical processes scale. My experience combines backend engineering, AI integration, observability and production-oriented system design.",
     },
     ctaWork: { es: "Ver proyectos", en: "View projects" },
     ctaGithub: { es: "GitHub", en: "GitHub" },
   },
   stats: [
-    { value: "4+", label: { es: "años de experiencia", en: "years of experience" } },
-    { value: "10", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
-    { value: "61", label: { es: "tests automatizados", en: "automated tests" } },
-    { value: "MSc", label: { es: "Magíster en TI", en: "MSc in IT" } },
+    { value: { es: "10+", en: "10+" }, label: { es: "proyectos públicos", en: "public projects" } },
+    { value: { es: "3", en: "3" }, label: { es: "arquitecturas reconstruidas", en: "rebuilt architectures" } },
+    { value: { es: "IA", en: "AI" }, label: { es: "integrada en producción", en: "integrated in production" } },
+    { value: { es: "MSc", en: "MSc" }, label: { es: "Transformación Digital", en: "Digital Transformation" } },
   ],
+  how: {
+    eyebrow: { es: "Cómo trabajo", en: "How I work" },
+    title: { es: "Criterio antes que stack", en: "Judgment before stack" },
+    lead: {
+      es: "Cuatro cosas que hago igual sin importar el lenguaje o el framework del proyecto.",
+      en: "Four things I do the same way regardless of the project's language or framework.",
+    },
+  },
   work: {
     eyebrow: { es: "Proyectos destacados", en: "Featured work" },
     title: { es: "Ingeniería real, no demos de juguete", en: "Real engineering, not toy demos" },
@@ -38,27 +46,37 @@ export const t = {
     view: { es: "Ver repositorio", en: "View repo" },
   },
   skills: {
-    eyebrow: { es: "Stack técnico", en: "Tech stack" },
-    title: { es: "Herramientas que uso bien", en: "Tools I use well" },
-    lead: { es: "Backend fuerte, frontend cuidado, y las prácticas que sostienen ambos.",
-            en: "Strong backend, careful frontend, and the practices that hold both together." },
+    eyebrow: { es: "Especialización", en: "Expertise" },
+    title: { es: "Áreas de especialización", en: "Areas of expertise" },
+    lead: { es: "Tecnologías que utilizo habitualmente para diseñar, construir y operar sistemas de software en producción.",
+            en: "The technologies I regularly use to design, build and operate software systems in production." },
   },
   about: {
     eyebrow: { es: "Perfil", en: "About" },
     title: { es: "Jefferson Cuadrado", en: "Jefferson Cuadrado" },
-    role: { es: "Desarrollador de Software · Backend Python/Django · IA Aplicada · Ecuador 🇪🇨",
-            en: "Software Developer · Python/Django Backend · Applied AI · Ecuador 🇪🇨" },
+    role: { es: "Ingeniero de Software · Arquitectura Backend · IA Aplicada · Ecuador 🇪🇨",
+            en: "Software Engineer · Backend Architecture · Applied AI · Ecuador 🇪🇨" },
     body: {
-      es: "Ingeniero en Sistemas Computacionales y Magíster en Tecnologías de la Información (mención Transformación Digital e Innovación) por la UNEMI. Más de 4 años en desarrollo backend y automatización de procesos institucionales: módulos de gestión académica, pipelines de OCR con Google Document AI para admisión, integración de LLMs y agentes inteligentes, notificaciones automatizadas y observabilidad con Sentry. Me enfocan la arquitectura por capas, la calidad y la entrega iterativa. Este portafolio consolida ese trabajo — reescrito y sanitizado.",
-      en: "Computer Systems Engineer and MSc in Information Technology (Digital Transformation & Innovation) from UNEMI. 4+ years in backend development and institutional process automation: academic-management modules, OCR pipelines with Google Document AI for admissions, LLM integration and intelligent agents, automated notifications and Sentry observability. I focus on layered architecture, quality and iterative delivery. This portfolio consolidates that work — rewritten and sanitized.",
+      es: [
+        "Soy Ingeniero en Sistemas Computacionales y Magíster en Tecnologías de la Información con énfasis en Transformación Digital e Innovación.",
+        "Durante los últimos años he desarrollado plataformas para instituciones de educación superior, participando en la automatización de procesos académicos, la digitalización documental, la integración de inteligencia artificial y la construcción de servicios backend utilizados en producción.",
+        "Mi interés principal es la arquitectura de software. Disfruto diseñando sistemas que permanezcan simples a medida que crecen, donde la calidad, la observabilidad y las pruebas automatizadas permitan evolucionar el código con seguridad.",
+        "Este portafolio reúne implementaciones reconstruidas desde cero que representan soluciones reales desarrolladas para producción, eliminando cualquier dependencia propietaria o información confidencial.",
+      ],
+      en: [
+        "I am a Computer Systems Engineer with an MSc in Information Technology, focused on Digital Transformation and Innovation.",
+        "Over the past few years I have built platforms for higher-education institutions, working on academic process automation, document digitization, artificial-intelligence integration and backend services running in production.",
+        "Software architecture is my main interest. I enjoy designing systems that stay simple as they grow, where quality, observability and automated testing make it safe to keep evolving the code.",
+        "This portfolio gathers implementations rebuilt from scratch that stand in for real solutions shipped to production, with every proprietary dependency and confidential detail removed.",
+      ],
     },
     timelineTitle: { es: "Trayectoria", en: "Timeline" },
   },
   contact: {
     eyebrow: { es: "Contacto", en: "Get in touch" },
-    title: { es: "¿Trabajamos juntos?", en: "Let's work together" },
-    lead: { es: "Abierto a roles senior full-stack / backend, remoto o híbrido.",
-            en: "Open to senior full-stack / backend roles, remote or hybrid." },
+    title: { es: "Construyamos el próximo sistema.", en: "Let's build the next system." },
+    lead: { es: "Estoy abierto a participar en equipos que desarrollen productos de software, plataformas empresariales o soluciones basadas en inteligencia artificial, especialmente en roles Backend, Full Stack o AI Engineering.",
+            en: "I'm open to joining teams building software products, enterprise platforms or AI-based solutions, particularly in Backend, Full Stack or AI Engineering roles." },
     email: { es: "Escríbeme", en: "Email me" },
   },
   footer: {
@@ -66,6 +84,52 @@ export const t = {
     en: "Built with React, TypeScript and Framer Motion. Designed and built by Jefferson Cuadrado.",
   },
 };
+
+export interface Principle {
+  key: string;
+  title: { es: string; en: string };
+  subtitle: { es: string; en: string };
+  body: { es: string; en: string };
+}
+
+export const principles: Principle[] = [
+  {
+    key: "arquitectura",
+    title: { es: "Arquitectura", en: "Architecture" },
+    subtitle: { es: "Simple hoy, evolutiva mañana", en: "Simple today, evolvable tomorrow" },
+    body: {
+      es: "Diseño sistemas utilizando principios SOLID, separación por capas y arquitectura hexagonal cuando aporta mantenibilidad. Prefiero soluciones simples que puedan evolucionar durante años, y evito las capas que solo agregan ceremonia.",
+      en: "I design systems using SOLID principles, layered separation and hexagonal architecture where it actually buys maintainability. I favour simple solutions that can keep evolving for years, and avoid layers that only add ceremony.",
+    },
+  },
+  {
+    key: "automatizacion",
+    title: { es: "Automatización", en: "Automation" },
+    subtitle: { es: "Menos trabajo manual, más proceso", en: "Less manual work, more process" },
+    body: {
+      es: "Busco eliminar tareas repetitivas mediante pipelines, integración entre sistemas, procesamiento documental e IA aplicada. Un proceso automatizado tiene que ser confiable: asumo que va a fallar a la mitad y lo diseño para poder reanudarlo.",
+      en: "I look to remove repetitive work through pipelines, system-to-system integration, document processing and applied AI. An automated process has to be dependable: I assume it will fail halfway and design it so it can be resumed.",
+    },
+  },
+  {
+    key: "calidad",
+    title: { es: "Calidad", en: "Quality" },
+    subtitle: { es: "Desde el diseño, no al final", en: "By design, not at the end" },
+    body: {
+      es: "La calidad no es una etapa posterior. Incorporo pruebas automatizadas, observabilidad, manejo de errores e idempotencia desde el diseño inicial, para que una regresión se detecte donde se produjo y no en la operación del cliente.",
+      en: "Quality is not a later stage. I build in automated testing, observability, error handling and idempotency from the initial design, so a regression surfaces where it was introduced rather than in the customer's operation.",
+    },
+  },
+  {
+    key: "producto",
+    title: { es: "Producto", en: "Product" },
+    subtitle: { es: "El problema antes que la herramienta", en: "The problem before the tool" },
+    body: {
+      es: "Antes de escribir código intento comprender el problema de negocio y a quién le cambia el día. La tecnología es una herramienta; el objetivo es reducir fricción y aportar valor real, y eso se verifica entregando en cortes cortos junto al usuario del proceso.",
+      en: "Before writing code I try to understand the business problem and whose day it changes. Technology is a tool; the goal is to reduce friction and deliver real value, and that gets verified by shipping in short increments next to the people who run the process.",
+    },
+  },
+];
 
 export interface Project {
   key: string;
@@ -227,13 +291,13 @@ export const skillGroups = [
 
 export const timeline = [
   { period: "2024 — Actualidad", title: { es: "Programador Full-Stack Senior — Freelance", en: "Senior Full-Stack Developer — Freelance" },
-    body: { es: "Diseño y desarrollo de plataformas web y apps móviles para clientes: backends con Django/Laravel, frontends en React/Vue/Angular/Flutter, IA aplicada y despliegue en la nube. Proyectos como Nexo ERP, dashboards analíticos y apps de comercio.", en: "Design and development of web platforms and mobile apps for clients: Django/Laravel backends, React/Vue/Angular/Flutter frontends, applied AI and cloud deployment. Projects such as Nexo ERP, analytics dashboards and e-commerce apps." } },
+    body: { es: "Diseño y llevo a producción plataformas completas para clientes, desde el modelo de datos hasta el despliegue y el soporte posterior. La decisión recurrente es cuánta arquitectura sostiene un equipo pequeño: separo el dominio de la infraestructura donde el cliente va a cambiar de proveedor, y evito capas que solo agregarían mantenimiento. Nexo ERP nació de ese criterio y terminó sirviendo de base para proyectos posteriores. Django, Laravel, Vue, React, Angular y Flutter.", en: "I design and ship full platforms for clients, from the data model to deployment and ongoing support. The recurring decision is how much architecture a small team can sustain: I separate domain from infrastructure where the client will change providers, and avoid layers that would only add maintenance. Nexo ERP came out of that judgment and ended up as the base for later projects. Django, Laravel, Vue, React, Angular and Flutter." } },
   { period: "Feb 2026 — Actualidad", title: { es: "Programador Semi Senior — WhistleCorp S.A.S", en: "Semi-Senior Developer — WhistleCorp S.A.S" },
-    body: { es: "Backend a medida con Python, Django, DRF y FastAPI para gestión académica. Pipeline de OCR con Document AI (admisión), integración de LLMs y Ollama con visión multimodal, agentes inteligentes, observabilidad con Sentry y despliegue en GCP/Azure.", en: "Custom backends with Python, Django, DRF and FastAPI for academic management. Document AI OCR pipeline (admissions), LLM + Ollama multimodal integration, intelligent agents, Sentry observability and GCP/Azure deployment." } },
+    body: { es: "Diseño y desarrollo de soluciones backend para procesos académicos críticos, integrando OCR, modelos LLM, agentes inteligentes y observabilidad para mejorar la operación institucional. Llevé la admisión de la revisión manual de documentos a un pipeline de OCR con escalado por capas, con validación real de cédula, reduciendo la verificación humana y los errores de digitación. Los proveedores de IA quedan detrás de puertos, para cambiarlos sin tocar el dominio. Python, Django, DRF, FastAPI, Document AI, Ollama, Sentry, GCP y Azure.", en: "Design and development of backend solutions for critical academic processes, integrating OCR, LLMs, intelligent agents and observability to improve institutional operations. I moved admissions from manual document review to a layered-escalation OCR pipeline with real national-ID validation, cutting human verification and data-entry errors. AI providers sit behind ports, so they can be swapped without touching the domain. Python, Django, DRF, FastAPI, Document AI, Ollama, Sentry, GCP and Azure." } },
   { period: "2023 — 2026", title: { es: "Desarrollador de Software — UNEMI", en: "Software Developer — UNEMI" },
-    body: { es: "Módulos de seguimiento académico y reportería, automatización de distributivos docentes, integración con Moodle, IA aplicada a procesos educativos, reportes para POA y acreditación. Java (Spring Boot), Django, Svelte, React.", en: "Academic-tracking and reporting modules, teaching-load automation, Moodle integration, applied AI for education, accreditation reports. Java (Spring Boot), Django, Svelte, React." } },
+    body: { es: "Automatización de procesos académicos sobre un sistema con años de historia y operación en curso: el distributivo docente, que se armaba a mano cada periodo, pasó a calcularse con reglas versionadas y auditables. Reportería para POA y acreditación, seguimiento académico e integración con Moodle. Buena parte del trabajo fue de criterio: decidir qué se podía refactorizar sin interrumpir la operación. Java (Spring Boot), Django, Svelte y React.", en: "Automating academic processes on a system with years of history and live operations: the teaching-load allocation, previously assembled by hand each term, moved to versioned, auditable rules. Reporting for institutional planning and accreditation, academic tracking and Moodle integration. Much of the work was judgment: deciding what could be refactored without interrupting operations. Java (Spring Boot), Django, Svelte and React." } },
   { period: "2022 — 2023", title: { es: "Desarrollador de Software — EPUNEMI", en: "Software Developer — EPUNEMI" },
-    body: { es: "Digitalización de servicios de UNEMI Posgrados; lideré el sistema de selección docente de posgrado. Python (Django, DRF), Svelte, PostgreSQL.", en: "Digitized UNEMI Graduate School services; led the postgraduate faculty-selection system. Python (Django, DRF), Svelte, PostgreSQL." } },
+    body: { es: "Digitalización de servicios de UNEMI Posgrados. Lideré el sistema de selección docente de posgrado: definí el modelo de datos, las reglas de puntuación y el flujo de aprobación junto a los usuarios del proceso, y lo sostuve durante convocatorias reales con plazos que no se movían. Python (Django, DRF), Svelte y PostgreSQL.", en: "Digitized UNEMI Graduate School services. I led the postgraduate faculty-selection system: I defined the data model, the scoring rules and the approval flow together with the people who run the process, and supported it through real application rounds with immovable deadlines. Python (Django, DRF), Svelte and PostgreSQL." } },
   { period: "2019 — 2021", title: { es: "Técnico de Soporte de Redes N2 — Interman", en: "Network Support Technician N2 — Interman" },
-    body: { es: "Diseño y mantenimiento de redes LAN/WAN, configuración de equipos CISCO y soporte de segundo nivel.", en: "LAN/WAN network design and maintenance, CISCO device configuration and second-level support." } },
+    body: { es: "Diseño y mantenimiento de redes LAN/WAN y soporte de segundo nivel con usuarios esperando del otro lado. De esa etapa viene el hábito de aislar la causa antes de tocar nada, que sigue siendo lo que más me sirve al diagnosticar sistemas en producción.", en: "LAN/WAN network design and maintenance and second-level support, with users waiting on the other end. That period is where the habit of isolating the cause before changing anything comes from — still the thing that helps me most when diagnosing production systems." } },
 ];

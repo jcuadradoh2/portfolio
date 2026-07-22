@@ -98,9 +98,13 @@ section[id] { scroll-margin-top: 72px; }
 @media (max-width: 820px) { .skills { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .skills { grid-template-columns: 1fr; } }
 
+.how-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; } }
+
 /* ---------- About / Timeline ---------- */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .about-body { color: var(--text-dim); font-size: 17px; }
+.about-body + .about-body { margin-top: 26px; }
 .timeline { position: relative; padding-left: 8px; }
 .timeline-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand-2);
   margin-bottom: 24px; }
