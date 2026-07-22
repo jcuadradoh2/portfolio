@@ -346,8 +346,8 @@ function About() {
           </div>
         </Reveal>
         <Reveal delay={120}>
-          <div className="timeline">
-            <h4 className="timeline-title">{tr(strings.about.timelineTitle, lang)}</h4>
+          <div className="timeline" role="region" aria-labelledby="timeline-title" tabIndex={0}>
+            <h4 className="timeline-title" id="timeline-title">{tr(strings.about.timelineTitle, lang)}</h4>
             {timeline.map((item, i) => (
               <div className="tl-item" key={i}>
                 <span className="tl-dot" />
