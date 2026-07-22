@@ -36,10 +36,10 @@ export const t = {
   },
   work: {
     eyebrow: { es: "Proyectos destacados", en: "Featured work" },
-    title: { es: "Ingeniería real, no demos de juguete", en: "Real engineering, not toy demos" },
+    title: { es: "Código que puedes ejecutar y revisar", en: "Code you can run and read" },
     lead: {
-      es: "Cada proyecto corre, tiene tests y arquitectura pensada. AgentForge y el pipeline de OCR se muestran con código completo; el resto, con capturas del sistema en funcionamiento.",
-      en: "Every project runs, has tests and deliberate architecture. AgentForge and the OCR pipeline ship with full source; the rest with screenshots of the working system.",
+      es: "Cada proyecto corre en local, tiene tests y deja las decisiones de arquitectura a la vista en el repositorio. AgentForge y el pipeline de OCR se muestran con código completo; el resto, con capturas del sistema en funcionamiento.",
+      en: "Every project runs locally, has tests, and leaves its architectural decisions visible in the repository. AgentForge and the OCR pipeline ship with full source; the rest with screenshots of the working system.",
     },
     featured: { es: "Código completo", en: "Full source" },
     captures: { es: "Capturas", en: "Screenshots" },
