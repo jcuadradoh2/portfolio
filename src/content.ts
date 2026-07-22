@@ -22,7 +22,7 @@ export const t = {
   },
   stats: [
     { value: "4+", label: { es: "años de experiencia", en: "years of experience" } },
-    { value: "8", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
+    { value: "10", label: { es: "proyectos de portafolio", en: "portfolio projects" } },
     { value: "61", label: { es: "tests automatizados", en: "automated tests" } },
     { value: "MSc", label: { es: "Magíster en TI", en: "MSc in IT" } },
   ],
@@ -30,8 +30,8 @@ export const t = {
     eyebrow: { es: "Proyectos destacados", en: "Featured work" },
     title: { es: "Ingeniería real, no demos de juguete", en: "Real engineering, not toy demos" },
     lead: {
-      es: "Cada proyecto corre, tiene tests y arquitectura pensada. AgentForge se muestra con código completo; el resto, con capturas del sistema en funcionamiento.",
-      en: "Every project runs, has tests and deliberate architecture. AgentForge ships with full source; the rest with screenshots of the working system.",
+      es: "Cada proyecto corre, tiene tests y arquitectura pensada. AgentForge y el pipeline de OCR se muestran con código completo; el resto, con capturas del sistema en funcionamiento.",
+      en: "Every project runs, has tests and deliberate architecture. AgentForge and the OCR pipeline ship with full source; the rest with screenshots of the working system.",
     },
     featured: { es: "Código completo", en: "Full source" },
     captures: { es: "Capturas", en: "Screenshots" },
@@ -94,6 +94,22 @@ export const projects: Project[] = [
     shots: ["chat-dark.png", "pipeline-dark.png", "login-dark.png"],
   },
   {
+    key: "ocr",
+    name: "OCR Documental EC",
+    tagline: {
+      es: "Réplica funcional de un pipeline OCR en producción",
+      en: "Working replica of a production OCR pipeline",
+    },
+    description: {
+      es: "Prototipo funcional que replica el pipeline de OCR documental que implementé en producción dentro del sistema de gestión académica de una IES (proceso de admisión). Reescrito desde cero y sanitizado: cero código propietario, cero secretos, datos ficticios. El motor OCR es un puerto hexagonal con escalado por capas —capa de texto nativo con pypdf, luego motor de visión tipo Google Document AI—, validación real del checksum de cédula ecuatoriana (módulo 10, provincias 01–24 y 30, regla del tercer dígito) y extracción/conciliación de montos en formato local (1.900,00) con tolerancia de 2 centavos.",
+      en: "A working prototype that replicates the document-OCR pipeline I shipped to production inside the academic-management system of a higher-education institution (admissions intake). Rewritten from scratch and sanitized: no proprietary code, no secrets, synthetic data. The OCR engine is a hexagonal port with layer-by-layer escalation —native PDF text layer via pypdf, then a Google Document AI-style vision engine—, real Ecuadorian ID checksum validation (mod-10, provinces 01–24 and 30, third-digit rule) and local-format amount extraction/reconciliation (1.900,00) within a 2-cent tolerance.",
+    },
+    tags: ["Python", "Django", "OCR", "Document AI", "Hexagonal", "pypdf"],
+    featured: true,
+    repo: "https://github.com/jcuadradoh2/academic-modules-showcase/tree/main/backend/ocr",
+    shots: ["ocr-dark.webp"],
+  },
+  {
     key: "telco",
     name: "Telco Churn EDA",
     tagline: { es: "Análisis exploratorio de datos (Data Science)", en: "Exploratory Data Analysis (Data Science)" },
@@ -122,10 +138,10 @@ export const projects: Project[] = [
   {
     key: "academic",
     name: "Academic Modules",
-    tagline: { es: "Módulos de un ERP académico (sanitizados)", en: "Academic-ERP modules (sanitized)" },
+    tagline: { es: "Firma electrónica y pagos de un ERP académico (réplica sanitizada)", en: "E-signature and payments from an academic ERP (sanitized replica)" },
     description: {
-      es: "Reescritura sanitizada de los módulos con más ingeniería: OCR multi-motor con validación real de cédula ecuatoriana, firma electrónica de PDFs con endesive (certificado .p12 + firma masiva concurrente), y pasarela de pagos estilo PlaceToPay con webhook firmado, idempotencia y conciliación. Django + DRF + React.",
-      en: "Sanitized rewrite of the most engineering-heavy modules: multi-engine OCR with real Ecuadorian ID validation, endesive PDF e-signature (.p12 cert + concurrent batch signing), and a PlaceToPay-style gateway with a signed webhook, idempotency and reconciliation. Django + DRF + React.",
+      es: "El resto de la réplica del ERP académico de la IES, junto al módulo de OCR: firma electrónica de PDFs con endesive (PAdES/CMS real con certificado .p12 formato Ecuador y firma masiva concurrente con ThreadPoolExecutor), y pasarela de pagos estilo PlaceToPay con webhook firmado verificado en tiempo constante, idempotencia y conciliación cabecera-detalle al centavo. Django + DRF + React, todo reescrito y sin datos reales.",
+      en: "The rest of the sanitized replica of the institution's academic ERP, alongside the OCR module: PDF e-signature with endesive (real PAdES/CMS using an Ecuador-format .p12 cert and concurrent batch signing via ThreadPoolExecutor), and a PlaceToPay-style gateway with a constant-time signed-webhook check, idempotency and to-the-cent header/line reconciliation. Django + DRF + React, fully rewritten with no real data.",
     },
     tags: ["Django", "DRF", "endesive", "React", "Cryptography", "SimpleJWT"],
     featured: false,
@@ -157,6 +173,19 @@ export const projects: Project[] = [
     featured: false,
     repo: "https://github.com/jcuadradoh2/aurora-design-system",
     shots: ["hero-dark.png", "tokens-dark.png", "components-dark.png"],
+  },
+  {
+    key: "site",
+    name: "Este portafolio + Lab",
+    tagline: { es: "Frontend de producto y motion en la web", en: "Product frontend and motion on the web" },
+    description: {
+      es: "El sitio que estás viendo y su /lab de experimentos. React 19 + Vite 8 + TypeScript, bilingüe ES/EN, tema claro/oscuro y accesibilidad. La ingeniería está en el rendimiento: Remotion sacado del bundle inicial por code-splitting (−40% de JS), showreel pre-renderizado a MP4 en bucle en vez de reconciliar la composición a 30fps en runtime, scrubbing de video dirigido por el cursor sobre un clip all-intra, y animaciones apagadas fuera del viewport con IntersectionObserver.",
+      en: "The site you're looking at and its /lab of experiments. React 19 + Vite 8 + TypeScript, bilingual ES/EN, light/dark theme and accessibility. The engineering is in the performance: Remotion code-split out of the initial bundle (−40% JS), a showreel pre-rendered to a looping MP4 instead of reconciling the composition at 30fps at runtime, cursor-driven video scrubbing over an all-intra clip, and animations shut off outside the viewport via IntersectionObserver.",
+    },
+    tags: ["React 19", "Vite", "TypeScript", "Remotion", "WebGL", "Framer Motion"],
+    featured: false,
+    repo: "https://github.com/jcuadradoh2/portfolio",
+    shots: ["hero.webp", "lab-remotion.webp", "lab-lithos.webp", "lab-pulse3d.webp"],
   },
   {
     key: "nexo",
