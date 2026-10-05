@@ -247,6 +247,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="project-tags">
             {project.tags.map((tag) => <span key={tag} className="tag">{tag}</span>)}
           </div>
+          {project.doc && (
+            <a className="project-link" href={`${BASE}${project.doc.href}`} target="_blank" rel="noreferrer">
+              {tr(project.doc.label, lang)} ↗
+            </a>
+          )}
           {project.private ? (
             <span className="project-link project-private">🔒 {lang === "es" ? "Repositorio privado" : "Private repository"}</span>
           ) : (
