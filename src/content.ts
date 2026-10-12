@@ -141,6 +141,7 @@ export interface Project {
   repo: string;
   shots: string[];
   private?: boolean;
+  doc?: { href: string; label: { es: string; en: string } };
 }
 
 export const projects: Project[] = [
@@ -172,6 +173,24 @@ export const projects: Project[] = [
     featured: true,
     repo: "https://github.com/jcuadradoh2/academic-modules-showcase/tree/main/backend/ocr",
     shots: ["ocr-dark.webp"],
+  },
+  {
+    key: "atlas",
+    name: "Atlas",
+    tagline: {
+      es: "Asistente operativo con agentes de IA y RAG",
+      en: "Operational assistant with AI agents and RAG",
+    },
+    description: {
+      es: "Prueba de concepto para una distribuidora ficticia: un agente LangGraph que decide si responder con datos vivos del ERP, con políticas internas (RAG con citas verificadas) o con ambos, y se abstiene cuando no hay evidencia. Los permisos los aplica el servidor, no el modelo. Incluye panel de administración con la traza completa de cada turno, gestión de documentos, evaluación con Ragas y notificaciones por Telegram con respaldo por correo.",
+      en: "Proof of concept for a fictional distributor: a LangGraph agent that decides whether to answer from live ERP data, from internal policies (RAG with verified citations) or both, and abstains when there is no evidence. Permissions are enforced by the server, not the model. Includes an admin panel with the full trace of every turn, document management, Ragas evaluation and Telegram notifications with email fallback.",
+    },
+    tags: ["Python", "Django · DRF", "LangGraph", "Gemini", "pgvector", "React 19"],
+    featured: true,
+    repo: "",
+    private: true,
+    doc: { href: "docs/atlas-instructivo.pdf", label: { es: "Ver instructivo (PDF)", en: "User guide (PDF, Spanish)" } },
+    shots: ["chat-cliente.png", "chat-mixed.png", "traza.png", "panel-resumen.png", "conocimiento-visor.png"],
   },
   {
     key: "telco",
