@@ -77,6 +77,8 @@ section { padding: 96px 0; position: relative; }
   color: #fff; border: none; box-shadow: 0 12px 30px rgba(91, 140, 255, 0.4);
 }
 .btn:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.btn.sm { padding: 6px 12px; font-size: 12.5px; border-radius: 8px; gap: 6px; }
+.tl-link { margin-top: 10px; }
 
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);

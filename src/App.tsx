@@ -359,6 +359,11 @@ function About() {
                 <div className="tl-period">{item.period}</div>
                 <div className="tl-role">{tr(item.title, lang)}</div>
                 <p className="tl-body">{tr(item.body, lang)}</p>
+                {item.link && (
+                  <a className="btn sm tl-link" href={`${BASE}${item.link.href}`} target="_blank" rel="noreferrer">
+                    {tr(item.link.label, lang)} ↗
+                  </a>
+                )}
               </div>
             ))}
           </div>
