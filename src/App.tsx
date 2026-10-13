@@ -11,7 +11,7 @@ const Motion = lazy(() => import("./Motion"));
 
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
-const latest = projects.find((p) => p.featured) ?? projects[0];
+const latest = projects.find((p) => p.key === "atlas") ?? projects[0];
 
 // Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
 // "#contact" hash would be read by HashRouter as a route and unmount the app.
@@ -382,12 +382,12 @@ function Skills() {
               const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
               return (
                 <li key={i} className="skill-row" style={{ "--c": c } as CSSProperties}>
-                  <div className="skill-head">
-                    <span className="skill-badge"><Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
+                  <span className="skill-badge"><Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
+                  <div className="skill-body">
                     <h4>{tr(g.title, lang)}</h4>
-                  </div>
-                  <div className="skill-chips">
-                    {g.items.map((it) => <span className="skill-chip" key={it}>{it}</span>)}
+                    <div className="skill-chips">
+                      {g.items.map((it) => <span className="skill-chip" key={it}>{it}</span>)}
+                    </div>
                   </div>
                 </li>
               );
