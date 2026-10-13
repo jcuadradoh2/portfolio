@@ -79,7 +79,7 @@ section[id] { scroll-margin-top: 72px; }
 .latest:hover .round-arrow, .service:hover .round-arrow { background: var(--brand); color: #fff; border-color: transparent; transform: translateX(2px); }
 
 /* Visual: cursor-scrubbed android + orange ribbon + floating glass services */
-.hero-visual { --vh: max(520px, min(78vh, 720px)); position: relative; height: var(--vh); }
+.hero-visual { --vh: max(580px, min(88vh, 820px)); position: relative; height: var(--vh); }
 /* ponytail: fixed-ratio stage (no transform, so the video's blend mode still reaches the page) keeps robot + ribbon locked together at any column width */
 .hero-stage { position: absolute; top: 0; height: 100%; width: calc(var(--vh) * .95); left: calc(50% - var(--vh) * .475); }
 .hero-halo { position: absolute; inset: 12% 8% 6% 14%; border-radius: 50%; z-index: 0;
@@ -135,11 +135,11 @@ section[id] { scroll-margin-top: 72px; }
 @media (max-width: 960px) {
   .hero { padding-top: 100px; }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-visual { --vh: 560px; }
+  .hero-visual { --vh: 620px; }
   .scroll-cue { display: none; }
 }
 @media (max-width: 640px) {
-  .hero-visual { --vh: 420px; }
+  .hero-visual { --vh: 470px; }
   .services { display: none; }
   .stats { grid-template-columns: repeat(2, auto); row-gap: 18px; }
   .stat:nth-child(3) { padding-left: 0; border-left: none; }
