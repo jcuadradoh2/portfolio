@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, Plus, ArrowLeft, GraduationCap, Award, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import { TextReveal } from "./TextReveal";
 import "./app.css";
 
-const Motion = lazy(() => import("./Motion"));
 
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
@@ -155,7 +154,7 @@ function Hero() {
             <a className="btn primary" href="#work" data-cuelume-press data-cuelume-release onClick={(e) => scrollToId(e, "work")}>
               {tr(strings.hero.ctaWork, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
             <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaGithub, lang)}</a>
-            <a className="hero-watch" href="#motion" onClick={(e) => scrollToId(e, "motion")}>
+            <a className="hero-watch" href="#/lab">
               <span className="hero-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span>
               <span><b>{tr(strings.hero.watch, lang)}</b><small>{tr(strings.hero.watchSub, lang)}</small></span>
             </a>
@@ -525,6 +524,7 @@ const CLIENTS = [
   { name: "WhistleCorp", src: "firma/logo-transparente.png" },
   { name: "Universidad Casa Grande", src: "logos/ucg.png" },
   { name: "UPSE", src: "logos/upse.jpg" },
+  { name: "Exducere", src: "logos/exducere.svg" },
   { name: "UNEMI", src: "logos/unemi.png" },
   { name: "EPUNEMI", src: "logos/epunemi.svg" },
 ];
@@ -535,9 +535,15 @@ function Clients() {
     <section className="clients" aria-labelledby="clients-title">
       <div className="container">
         <p className="clients-title" id="clients-title">{tr(strings.clients, lang)}</p>
-        <ul className="clients-row">
-          {CLIENTS.map((c) => <li key={c.name}><img src={`${BASE}${c.src}`} alt={c.name} loading="lazy" /></li>)}
-        </ul>
+        <div className="clients-marquee">
+          <ul className="clients-row">
+            {[0, 1, 2, 3].flatMap((k) => CLIENTS.map((c) => (
+              <li key={`${k}-${c.name}`} aria-hidden={k > 0 || undefined}>
+                <img src={`${BASE}${c.src}`} alt={k ? "" : c.name} loading="lazy" />
+              </li>
+            )))}
+          </ul>
+        </div>
       </div>
     </section>
   );
@@ -553,17 +559,17 @@ function Process() {
           <h2 className="section-title">{tr(strings.process.title, lang)}</h2>
           <p className="section-lead">{tr(strings.process.lead, lang)}</p>
         </Reveal>
-        <Reveal>
-          <ol className="process">
-            {strings.process.steps.map((s, i) => (
-              <li key={i} className="process-step card">
-                <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
-                <h4>{tr(s.title, lang)}</h4>
+        <ol className="process">
+          {strings.process.steps.map((s, i) => (
+            <li key={i} className={`process-step${i % 2 ? " alt" : ""}`} style={{ "--i": i } as CSSProperties}>
+              <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{tr(s.title, lang)}</h3>
                 <p>{tr(s.body, lang)}</p>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -575,11 +581,11 @@ function CtaBand() {
     <section className="cta-sec">
       <div className="container">
         <Reveal>
-          <div className="cta-band">
+          <div className="cta-band card">
             <svg className="cta-curve" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M150 200 C 220 130 270 118 400 118 L400 200 Z" fill="rgba(255,255,255,.06)" />
-              <path d="M110 200 C 190 120 240 104 400 104" fill="none" stroke="#fd7400" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-              <path d="M88 200 C 170 112 222 92 400 92" fill="none" stroke="rgba(255,255,255,.35)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+              <path d="M150 200 C 220 130 270 118 400 118 L400 200 Z" className="cta-leaf" />
+              <path d="M110 200 C 190 120 240 104 400 104" fill="none" className="cta-line" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+              <path d="M88 200 C 170 112 222 92 400 92" fill="none" className="cta-line2" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
             </svg>
             <div>
               <p className="cta-eyebrow">{tr(strings.cta.eyebrow, lang)}</p>
@@ -675,9 +681,6 @@ export default function App() {
             <Process />
             <Work />
             <CtaBand />
-            <Suspense fallback={<div style={{ minHeight: 900 }} />}>
-              <Motion />
-            </Suspense>
             <Skills />
             <Timeline />
             <Faq />
