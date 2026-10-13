@@ -103,7 +103,9 @@ section[id] { scroll-margin-top: 72px; }
 
 .ribbon { position: absolute; left: -7%; top: 13%; width: 114%; height: auto; pointer-events: none; overflow: visible;
   filter: drop-shadow(0 14px 22px rgba(255, 90, 31, 0.35)); }
-.ribbon-back { z-index: 0; opacity: .8; }
+.ribbon-back { z-index: 0; opacity: .8;
+  -webkit-mask-image: linear-gradient(90deg, #000 35%, transparent 40%, transparent 59%, #000 64%);
+  mask-image: linear-gradient(90deg, #000 35%, transparent 40%, transparent 59%, #000 64%); }
 .ribbon-front { z-index: 2; }
 .ribbon text { fill: #fff; font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: .02em; }
 
