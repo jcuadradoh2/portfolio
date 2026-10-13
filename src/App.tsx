@@ -523,6 +523,8 @@ function Timeline() {
 
 const CLIENTS = [
   { name: "WhistleCorp", src: "firma/logo-transparente.png" },
+  { name: "Universidad Casa Grande", src: "logos/ucg.png" },
+  { name: "UPSE", src: "logos/upse.jpg" },
   { name: "UNEMI", src: "logos/unemi.png" },
   { name: "EPUNEMI", src: "logos/epunemi.svg" },
 ];
