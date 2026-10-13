@@ -277,6 +277,7 @@ section[id] { scroll-margin-top: 72px; }
 .clients-row img { display: block; height: 44px; width: auto; max-width: 170px; object-fit: contain; filter: grayscale(1); opacity: .7;
   transition: opacity .2s ease, filter .2s ease; }
 .clients-row li:hover img { filter: none; opacity: 1; }
+.clients-row img.tall { height: 62px; }
 @keyframes marquee { to { transform: translateX(-25%); } }
 @media (prefers-reduced-motion: reduce) {
   .clients-row { animation: none; width: auto; flex-wrap: wrap; justify-content: center; row-gap: 14px; }

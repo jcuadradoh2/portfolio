@@ -523,7 +523,7 @@ function Timeline() {
 const CLIENTS = [
   { name: "WhistleCorp", src: "firma/logo-transparente.png" },
   { name: "Universidad Casa Grande", src: "logos/ucg.png" },
-  { name: "UPSE", src: "logos/upse.jpg" },
+  { name: "UPSE", src: "logos/upse.jpg", tall: true },
   { name: "Exducere", src: "logos/exducere.svg" },
   { name: "UNEMI", src: "logos/unemi.png" },
   { name: "EPUNEMI", src: "logos/epunemi.svg" },
@@ -539,7 +539,7 @@ function Clients() {
           <ul className="clients-row">
             {[0, 1, 2, 3].flatMap((k) => CLIENTS.map((c) => (
               <li key={`${k}-${c.name}`} aria-hidden={k > 0 || undefined}>
-                <img src={`${BASE}${c.src}`} alt={k ? "" : c.name} loading="lazy" />
+                <img className={c.tall ? "tall" : undefined} src={`${BASE}${c.src}`} alt={k ? "" : c.name} loading="lazy" />
               </li>
             )))}
           </ul>
