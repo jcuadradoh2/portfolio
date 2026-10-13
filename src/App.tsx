@@ -138,8 +138,6 @@ function Hero() {
       <div className="hero-spotlight" ref={spotRef} aria-hidden="true" />
       <div className="container hero-inner">
         <div className="hero-copy">
-          <motion.p className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}><span className="hero-dot" />{tr(strings.hero.role, lang)}</motion.p>
           <h1 className="hero-title" key={lang}>
             <TextReveal as="span" per="word" preset="fade-in-blur" speedReveal={1.1} delay={0.12}>
               {tr(strings.hero.titleA, lang)}</TextReveal>{" "}

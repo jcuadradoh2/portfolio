@@ -11,8 +11,6 @@ export const t = {
     cta: { es: "Hablemos", en: "Let's talk" },
   },
   hero: {
-    role: { es: "Ingeniero de Software · Arquitectura Backend · IA Aplicada",
-            en: "Software Engineer · Backend Architecture · Applied AI" },
     titleA: { es: "Convierto procesos de negocio complejos en", en: "I turn complex business processes into" },
     titleB: { es: "plataformas mantenibles.", en: "maintainable platforms." },
     lead: {
