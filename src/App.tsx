@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3 } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, GraduationCap, Award, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
@@ -11,6 +11,7 @@ const Motion = lazy(() => import("./Motion"));
 
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
+const LINKEDIN = "https://www.linkedin.com/in/jcuadradoh2";
 const latest = projects.find((p) => p.key === "atlas") ?? projects[0];
 
 // Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
@@ -63,9 +64,9 @@ function Nav() {
       <div className="container nav-inner">
         <a href="#top" className="brand" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "top")}>JC<span>.</span></a>
         <nav className="nav-links" aria-label="Primary">
+          <a href="#about" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "about")}>{tr(strings.nav.about, lang)}</a>
           <a href="#work" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "work")}>{tr(strings.nav.work, lang)}</a>
           <a href="#skills" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "skills")}>{tr(strings.nav.skills, lang)}</a>
-          <a href="#about" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "about")}>{tr(strings.nav.about, lang)}</a>
           <a href="#contact" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "contact")}>{tr(strings.nav.contact, lang)}</a>
           <a href="#/lab" className="nav-lab" data-cuelume-hover="sparkle">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>
@@ -262,25 +263,6 @@ function Stat({ value, label, run }: { value: string; label: string; run: boolea
   );
 }
 
-function PrincipleCard({ principle, index }: { principle: Principle; index: number }) {
-  const { lang } = useLang();
-  const { c, Icon } = HOW_STYLE[index % HOW_STYLE.length];
-  return (
-    <Reveal delay={index * 50}>
-      <div className="skill-card card" style={{ "--c": c } as CSSProperties}>
-        <div className="skill-head">
-          <span className="skill-badge"><Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
-          <div>
-            <h4>{tr(principle.title, lang)}</h4>
-            <p className="project-tagline">{tr(principle.subtitle, lang)}</p>
-          </div>
-        </div>
-        <p className="project-desc">{tr(principle.body, lang)}</p>
-      </div>
-    </Reveal>
-  );
-}
-
 function HowIWork() {
   const { lang } = useLang();
   return (
@@ -291,9 +273,25 @@ function HowIWork() {
           <h2 className="section-title">{tr(strings.how.title, lang)}</h2>
           <p className="section-lead">{tr(strings.how.lead, lang)}</p>
         </Reveal>
-        <div className="skills how-grid">
-          {principles.map((p, i) => <PrincipleCard key={p.key} principle={p} index={i} />)}
-        </div>
+        <Reveal>
+          <ul className="skills-list">
+            {principles.map((pr: Principle, i) => {
+              const { c, Icon } = HOW_STYLE[i % HOW_STYLE.length];
+              return (
+                <li key={pr.key} className="skill-row card" style={{ "--c": c } as CSSProperties}>
+                  <span className="skill-badge"><Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
+                  <div className="skill-body">
+                    <div className="row-title">
+                      <h4>{tr(pr.title, lang)}</h4>
+                      <span className="row-sub">{tr(pr.subtitle, lang)}</span>
+                    </div>
+                    <p className="row-text">{tr(pr.body, lang)}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );
@@ -379,11 +377,11 @@ function Skills() {
           <p className="section-lead">{tr(strings.skills.lead, lang)}</p>
         </Reveal>
         <Reveal>
-          <ul className="skills-list card">
+          <ul className="skills-list">
             {skillGroups.map((g, i) => {
               const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
               return (
-                <li key={i} className="skill-row" style={{ "--c": c } as CSSProperties}>
+                <li key={i} className="skill-row card" style={{ "--c": c } as CSSProperties}>
                   <span className="skill-badge"><Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
                   <div className="skill-body">
                     <h4>{tr(g.title, lang)}</h4>
@@ -417,27 +415,62 @@ function Avatar() {
   );
 }
 
+const ABOUT_FACT_ICONS = [GraduationCap, Award, Code2];
+
 function About() {
   const { lang } = useLang();
+  const [lead, ...rest] = tr(strings.about.body, lang);
   return (
     <section id="about" className="about">
-      <div className="container about-grid">
+      <div className="container">
         <Reveal>
-          <div>
-            <div className="about-head">
+          <p className="eyebrow">{tr(strings.about.eyebrow, lang)}</p>
+          <h2 className="section-title">{tr(strings.about.heading, lang)}</h2>
+        </Reveal>
+        <Reveal delay={80}>
+          <div className="about-card card">
+            <aside className="about-id">
               <Avatar />
-              <div>
-                <p className="eyebrow">{tr(strings.about.eyebrow, lang)}</p>
-                <h2 className="section-title" style={{ marginBottom: 0 }}>{tr(strings.about.title, lang)}</h2>
-                <p className="about-role">{tr(strings.about.role, lang)}</p>
+              <h3>{tr(strings.about.title, lang)}</h3>
+              <p className="about-role">{tr(strings.about.role, lang)}</p>
+              <ul className="about-facts">
+                {strings.about.facts.map((f, i) => {
+                  const Icon = ABOUT_FACT_ICONS[i];
+                  return <li key={i}><Icon size={16} aria-hidden="true" />{tr(f, lang)}</li>;
+                })}
+              </ul>
+              <div className="about-social">
+                <a className="btn sm" href={GITHUB} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>
+                <a className="btn sm" href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={14} aria-hidden="true" /></a>
               </div>
+            </aside>
+            <div className="about-bio">
+              <p className="about-lead">{lead}</p>
+              {rest.map((p, i) => <p className="about-body" key={i}>{p}</p>)}
+              <a className="btn primary about-cta" href="#contact" onClick={(e) => scrollToId(e, "contact")}>
+                {tr(strings.nav.cta, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
             </div>
-            {tr(strings.about.body, lang).map((p, i) => <p className="about-body" key={i}>{p}</p>)}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Timeline() {
+  const { lang } = useLang();
+  return (
+    <section id="trayectoria" className="trayectoria">
+      <div className="container tray-grid">
+        <Reveal>
+          <div className="tray-head">
+            <p className="eyebrow">{tr(strings.about.timelineTitle, lang)}</p>
+            <h2 className="section-title">{tr(strings.about.timelineHeading, lang)}</h2>
           </div>
         </Reveal>
         <Reveal delay={120}>
           <div className="timeline" role="region" aria-labelledby="timeline-title" tabIndex={0}>
-            <h4 className="timeline-title" id="timeline-title">{tr(strings.about.timelineTitle, lang)}</h4>
+            <h4 className="sr-only" id="timeline-title">{tr(strings.about.timelineTitle, lang)}</h4>
             {timeline.map((item, i) => (
               <div className="tl-item" key={i}>
                 <span className="tl-dot" />
@@ -471,7 +504,7 @@ function Contact() {
             <div className="contact-actions">
               <a className="btn primary" href="mailto:jcuadradoh2@unemi.edu.ec" data-cuelume-press data-cuelume-release>{tr(strings.contact.email, lang)} →</a>
               <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>GitHub</a>
-              <a className="btn" href="https://www.linkedin.com/in/jcuadradoh2" target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>LinkedIn</a>
+              <a className="btn" href={LINKEDIN} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>LinkedIn</a>
             </div>
           </div>
         </Reveal>
@@ -496,13 +529,14 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <About />
         <HowIWork />
         <Work />
         <Suspense fallback={<div style={{ minHeight: 900 }} />}>
           <Motion />
         </Suspense>
         <Skills />
-        <About />
+        <Timeline />
         <Contact />
       </main>
     </AppProviders>

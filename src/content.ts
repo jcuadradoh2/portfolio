@@ -4,7 +4,7 @@ export const t = {
   nav: {
     work: { es: "Proyectos", en: "Work" },
     skills: { es: "Skills", en: "Skills" },
-    about: { es: "Perfil", en: "About" },
+    about: { es: "Sobre mí", en: "About me" },
     contact: { es: "Contacto", en: "Contact" },
     lab: { es: "Lab", en: "Lab" },
     cta: { es: "Hablemos", en: "Let's talk" },
@@ -66,8 +66,14 @@ export const t = {
             en: "The technologies I regularly use to design, build and operate software systems in production." },
   },
   about: {
-    eyebrow: { es: "Perfil", en: "About" },
+    eyebrow: { es: "Sobre mí", en: "About me" },
+    heading: { es: "Hola, soy Jefferson.", en: "Hi, I'm Jefferson." },
     title: { es: "Jefferson Cuadrado", en: "Jefferson Cuadrado" },
+    facts: [
+      { es: "Ingeniero en Sistemas Computacionales", en: "Computer Systems Engineer" },
+      { es: "MSc en TI · Transformación Digital e Innovación", en: "MSc in IT · Digital Transformation & Innovation" },
+      { es: "Arquitectura de software en producción", en: "Production software architecture" },
+    ],
     role: { es: "Ingeniero de Software · Arquitectura Backend · IA Aplicada · Ecuador 🇪🇨",
             en: "Software Engineer · Backend Architecture · Applied AI · Ecuador 🇪🇨" },
     body: {
@@ -85,6 +91,7 @@ export const t = {
       ],
     },
     timelineTitle: { es: "Trayectoria", en: "Timeline" },
+    timelineHeading: { es: "Experiencia profesional", en: "Professional experience" },
   },
   contact: {
     eyebrow: { es: "Contacto", en: "Get in touch" },
