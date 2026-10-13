@@ -561,7 +561,7 @@ function Process() {
         </Reveal>
         <ol className="process">
           {strings.process.steps.map((s, i) => (
-            <li key={i} className={`process-step${i % 2 ? " alt" : ""}`} style={{ "--i": i } as CSSProperties}>
+            <li key={i} className="process-step card" style={{ "--i": i } as CSSProperties}>
               <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
               <div>
                 <h3>{tr(s.title, lang)}</h3>
