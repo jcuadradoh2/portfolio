@@ -212,10 +212,12 @@ function HeroVisual({ sectionRef }: { sectionRef: React.RefObject<HTMLElement | 
   );
   return (
     <div className="hero-visual" ref={visualRef}>
-      <div className="hero-halo" aria-hidden="true" />
-      {band("back")}
-      <video ref={videoRef} className="hero-robot" src={`${BASE}robot.mp4`} poster={`${BASE}robot-poster.webp`} muted playsInline preload="auto" aria-hidden="true" />
-      {band("front")}
+      <div className="hero-stage">
+        <div className="hero-halo" aria-hidden="true" />
+        {band("back")}
+        <video ref={videoRef} className="hero-robot" src={`${BASE}robot.mp4`} poster={`${BASE}robot-poster.webp`} muted playsInline preload="auto" aria-hidden="true" />
+        {band("front")}
+      </div>
       <ul className="services">
         {strings.hero.services.map((s, i) => {
           const Icon = SERVICE_ICONS[i];
