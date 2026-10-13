@@ -12,6 +12,7 @@ import "./app.css";
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
 const LINKEDIN = "https://www.linkedin.com/in/jcuadradoh2";
+const WHATSAPP = "https://wa.me/593984923400";
 const latest = projects.find((p) => p.key === "atlas") ?? projects[0];
 const HOME_PROJECTS = ["atlas", "agentforge", "ocr"].map((k) => projects.find((p) => p.key === k)!);
 
@@ -471,6 +472,7 @@ function About() {
               <div className="about-social">
                 <a className="btn sm" href={GITHUB} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>
                 <a className="btn sm" href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={14} aria-hidden="true" /></a>
+                <a className="btn sm" href={WHATSAPP} target="_blank" rel="noreferrer">WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a>
               </div>
             </aside>
             <div className="about-bio">
@@ -642,6 +644,7 @@ function Contact() {
               <a className="btn primary" href="mailto:jcuadradoh2@unemi.edu.ec" data-cuelume-press data-cuelume-release>{tr(strings.contact.email, lang)} →</a>
               <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>GitHub</a>
               <a className="btn" href={LINKEDIN} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>LinkedIn</a>
+              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>WhatsApp</a>
             </div>
           </div>
         </Reveal>
