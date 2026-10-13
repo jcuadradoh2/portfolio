@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, Play, BarChart3 } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
@@ -301,12 +301,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { lang } = useLang();
   const [active, setActive] = useState(0);
   const shot = `${BASE}screenshots/${project.key}/${project.shots[active]}`;
+  const extra = project.tags.length - 3;
   return (
-    <Reveal delay={index * 60}>
-      <article className={`project card${project.featured ? " featured" : ""}`} data-cuelume-hover="chime">
+    <Reveal delay={(index % 3) * 60}>
+      <article className="project card" data-cuelume-hover="chime">
         <div className="project-media">
           <img src={shot} alt={`${project.name} screenshot`} loading="lazy"
             onError={(e) => ((e.target as HTMLImageElement).style.opacity = "0.12")} />
+          <span className={`badge${project.featured ? " gold" : ""}`}>
+            {project.featured ? tr(strings.work.featured, lang) : tr(strings.work.captures, lang)}
+          </span>
           {project.shots.length > 1 && (
             <div className="dots">
               {project.shots.map((_, i) => (
@@ -317,31 +321,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
         </div>
         <div className="project-body">
-          <div className="project-head">
-            <div>
-              <h3>{project.name}</h3>
-              <p className="project-tagline">{tr(project.tagline, lang)}</p>
-            </div>
-            <span className={`badge${project.featured ? " gold" : ""}`}>
-              {project.featured ? tr(strings.work.featured, lang) : tr(strings.work.captures, lang)}
-            </span>
-          </div>
+          <h3>{project.name}</h3>
+          <p className="project-tagline" title={tr(project.tagline, lang)}>{tr(project.tagline, lang)}</p>
           <p className="project-desc">{tr(project.description, lang)}</p>
           <div className="project-tags">
-            {project.tags.map((tag) => <span key={tag} className="tag">{tag}</span>)}
+            {project.tags.slice(0, 3).map((tag) => <span key={tag} className="tag">{tag}</span>)}
+            {extra > 0 && <span className="tag tag-more" title={project.tags.slice(3).join(" · ")}>+{extra}</span>}
           </div>
-          {project.doc && (
-            <a className="project-link" href={`${BASE}${project.doc.href}`} target="_blank" rel="noreferrer">
-              {tr(project.doc.label, lang)} ↗
-            </a>
-          )}
-          {project.private ? (
-            <span className="project-link project-private">🔒 {lang === "es" ? "Repositorio privado" : "Private repository"}</span>
-          ) : (
-            <a className="project-link" href={project.repo} target="_blank" rel="noreferrer">
-              {tr(strings.work.view, lang)} ↗
-            </a>
-          )}
+          <div className="project-foot">
+            {project.private ? (
+              <span className="project-link project-private">🔒 {lang === "es" ? "Repositorio privado" : "Private repository"}</span>
+            ) : (
+              <a className="project-link" href={project.repo} target="_blank" rel="noreferrer">
+                {tr(strings.work.view, lang)} <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            )}
+            {project.doc && (
+              <a className="project-link" href={`${BASE}${project.doc.href}`} target="_blank" rel="noreferrer">
+                {tr(project.doc.label, lang)} <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            )}
+          </div>
         </div>
       </article>
     </Reveal>
@@ -376,12 +376,12 @@ function Skills() {
           <h2 className="section-title">{tr(strings.skills.title, lang)}</h2>
           <p className="section-lead">{tr(strings.skills.lead, lang)}</p>
         </Reveal>
-        <div className="skills">
-          {skillGroups.map((g, i) => {
-            const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
-            return (
-              <Reveal key={i} delay={i * 50}>
-                <div className="skill-card card" style={{ "--c": c } as CSSProperties}>
+        <Reveal>
+          <ul className="skills-list card">
+            {skillGroups.map((g, i) => {
+              const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
+              return (
+                <li key={i} className="skill-row" style={{ "--c": c } as CSSProperties}>
                   <div className="skill-head">
                     <span className="skill-badge"><Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
                     <h4>{tr(g.title, lang)}</h4>
@@ -389,11 +389,11 @@ function Skills() {
                   <div className="skill-chips">
                     {g.items.map((it) => <span className="skill-chip" key={it}>{it}</span>)}
                   </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

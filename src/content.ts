@@ -21,7 +21,7 @@ export const t = {
     ctaWork: { es: "Ver proyectos", en: "View projects" },
     ctaGithub: { es: "GitHub", en: "GitHub" },
     watch: { es: "Mírame en movimiento", en: "See it in motion" },
-    watchSub: { es: "Motion & IA", en: "Motion & AI" },
+    watchSub: { es: "Showreel · Remotion", en: "Showreel · Remotion" },
     latest: { es: "Proyecto destacado", en: "Featured project" },
     scroll: { es: "Desliza", en: "Scroll down" },
     ribbon: { es: "Backend · IA Aplicada · Arquitectura · Data · Automatización · ", en: "Backend · Applied AI · Architecture · Data · Automation · " },
