@@ -1,9 +1,10 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, GraduationCap, Award, Code2 } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, Plus, ArrowLeft, GraduationCap, Award, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
 import { t as strings } from "./content";
+import { useLocation } from "react-router-dom";
 import { TextReveal } from "./TextReveal";
 import "./app.css";
 
@@ -13,12 +14,15 @@ const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
 const LINKEDIN = "https://www.linkedin.com/in/jcuadradoh2";
 const latest = projects.find((p) => p.key === "atlas") ?? projects[0];
+const HOME_PROJECTS = ["atlas", "agentforge", "ocr"].map((k) => projects.find((p) => p.key === k)!);
 
 // Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
 // "#contact" hash would be read by HashRouter as a route and unmount the app.
 function scrollToId(e: React.MouseEvent, id: string) {
   e.preventDefault();
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  else window.location.hash = `#/${id}`;
 }
 
 // Per-category accent + icon (warm orange palette) — index-aligned with skillGroups.
@@ -347,29 +351,46 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-function Work() {
+function Work({ all = false }: { all?: boolean }) {
   const { lang } = useLang();
   const [q, setQ] = useState("");
   const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
   const needle = fold(q.trim());
-  const list = projects.filter((p) => [p.name, ...p.tags, ...(p.keywords ?? [])].some((s) => fold(s).includes(needle)));
+  const list = !all ? HOME_PROJECTS : projects.filter((p) => [p.name, ...p.tags, ...(p.keywords ?? [])].some((s) => fold(s).includes(needle)));
   return (
-    <section id="work">
+    <section id={all ? "projects" : "work"} className={all ? "page-top" : undefined}>
       <div className="container">
-        <Reveal>
-          <p className="eyebrow">{tr(strings.work.eyebrow, lang)}</p>
-          <h2 className="section-title">{tr(strings.work.title, lang)}</h2>
-          <p className="section-lead">{tr(strings.work.lead, lang)}</p>
-        </Reveal>
-        <label className="project-search card">
-          <Search size={18} aria-hidden="true" />
-          <input type="search" value={q} onChange={(e) => setQ(e.target.value)}
-            placeholder={tr(strings.work.search, lang)} aria-label={tr(strings.work.search, lang)} />
-        </label>
+        {all ? (
+          <Reveal>
+            <a className="back-link" href="#/work"><ArrowLeft size={16} aria-hidden="true" />{tr(strings.work.back, lang)}</a>
+            <p className="eyebrow">{tr(strings.nav.work, lang)}</p>
+            <h1 className="section-title">{tr(strings.work.allTitle, lang)}</h1>
+            <p className="section-lead">{tr(strings.work.allLead, lang)}</p>
+          </Reveal>
+        ) : (
+          <Reveal>
+            <p className="eyebrow">{tr(strings.work.eyebrow, lang)}</p>
+            <h2 className="section-title">{tr(strings.work.title, lang)}</h2>
+            <p className="section-lead">{tr(strings.work.lead, lang)}</p>
+          </Reveal>
+        )}
+        {all && (
+          <label className="project-search card">
+            <Search size={18} aria-hidden="true" />
+            <input type="search" value={q} onChange={(e) => setQ(e.target.value)}
+              placeholder={tr(strings.work.search, lang)} aria-label={tr(strings.work.search, lang)} />
+          </label>
+        )}
         <div className="projects">
           {list.map((p, i) => <ProjectCard key={p.key} project={p} index={i} />)}
         </div>
         {!list.length && <p className="project-empty">{tr(strings.work.empty, lang)}</p>}
+        {!all && (
+          <div className="work-more">
+            <a className="btn" href="#/proyectos" data-cuelume-press>
+              {tr(strings.work.all, lang)} ({projects.length}) <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -500,6 +521,105 @@ function Timeline() {
   );
 }
 
+const CLIENTS = [
+  { name: "WhistleCorp", src: "firma/logo-transparente.png" },
+  { name: "UNEMI", src: "logos/unemi.png" },
+  { name: "EPUNEMI", src: "logos/epunemi.svg" },
+];
+
+function Clients() {
+  const { lang } = useLang();
+  return (
+    <section className="clients" aria-labelledby="clients-title">
+      <div className="container">
+        <p className="clients-title" id="clients-title">{tr(strings.clients, lang)}</p>
+        <ul className="clients-row">
+          {CLIENTS.map((c) => <li key={c.name}><img src={`${BASE}${c.src}`} alt={c.name} loading="lazy" /></li>)}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  const { lang } = useLang();
+  return (
+    <section id="process">
+      <div className="container">
+        <Reveal>
+          <p className="eyebrow">{tr(strings.process.eyebrow, lang)}</p>
+          <h2 className="section-title">{tr(strings.process.title, lang)}</h2>
+          <p className="section-lead">{tr(strings.process.lead, lang)}</p>
+        </Reveal>
+        <Reveal>
+          <ol className="process">
+            {strings.process.steps.map((s, i) => (
+              <li key={i} className="process-step card">
+                <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
+                <h4>{tr(s.title, lang)}</h4>
+                <p>{tr(s.body, lang)}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function CtaBand() {
+  const { lang } = useLang();
+  return (
+    <section className="cta-sec">
+      <div className="container">
+        <Reveal>
+          <div className="cta-band">
+            <svg className="cta-curve" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M150 200 C 220 130 270 118 400 118 L400 200 Z" fill="rgba(255,255,255,.06)" />
+              <path d="M110 200 C 190 120 240 104 400 104" fill="none" stroke="#fd7400" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+              <path d="M88 200 C 170 112 222 92 400 92" fill="none" stroke="rgba(255,255,255,.35)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+            </svg>
+            <div>
+              <p className="cta-eyebrow">{tr(strings.cta.eyebrow, lang)}</p>
+              <h2 className="cta-title">{tr(strings.cta.title, lang)}</h2>
+            </div>
+            <a className="btn primary" href="#contact" data-cuelume-press onClick={(e) => scrollToId(e, "contact")}>
+              {tr(strings.cta.button, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  const { lang } = useLang();
+  return (
+    <section id="faq">
+      <div className="container tray-grid">
+        <Reveal>
+          <div className="tray-head">
+            <p className="eyebrow">{tr(strings.faq.eyebrow, lang)}</p>
+            <h2 className="section-title">{tr(strings.faq.title, lang)}</h2>
+            <a className="btn" href="#contact" onClick={(e) => scrollToId(e, "contact")}>
+              {tr(strings.nav.cta, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="faq-list">
+            {strings.faq.items.map((it, i) => (
+              <details key={i} className="faq-item card">
+                <summary>{tr(it.q, lang)}<Plus size={18} aria-hidden="true" /></summary>
+                <p>{tr(it.a, lang)}</p>
+              </details>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   const { lang } = useLang();
   return (
@@ -526,27 +646,42 @@ function Contact() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+  const page = pathname === "/proyectos";
   useEffect(() => {
-    const id = window.location.hash.replace(/^#\/?/, "");
-    if (id && id !== "lab") {
-      const el = document.getElementById(id);
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 120);
-    }
-  }, []);
+    if (page) { window.scrollTo(0, 0); return; }
+    const id = pathname.slice(1);
+    if (!id) return;
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 120);
+    return () => clearTimeout(t);
+  }, [pathname, page]);
   return (
     <AppProviders>
       <Nav />
       <main>
-        <Hero />
-        <About />
-        <HowIWork />
-        <Work />
-        <Suspense fallback={<div style={{ minHeight: 900 }} />}>
-          <Motion />
-        </Suspense>
-        <Skills />
-        <Timeline />
-        <Contact />
+        {page ? (
+          <>
+            <Work all />
+            <Contact />
+          </>
+        ) : (
+          <>
+            <Hero />
+            <Clients />
+            <About />
+            <HowIWork />
+            <Process />
+            <Work />
+            <CtaBand />
+            <Suspense fallback={<div style={{ minHeight: 900 }} />}>
+              <Motion />
+            </Suspense>
+            <Skills />
+            <Timeline />
+            <Faq />
+            <Contact />
+          </>
+        )}
       </main>
     </AppProviders>
   );
