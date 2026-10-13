@@ -67,6 +67,7 @@ function Nav() {
           <a href="#about" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "about")}>{tr(strings.nav.about, lang)}</a>
           <a href="#work" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "work")}>{tr(strings.nav.work, lang)}</a>
           <a href="#skills" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "skills")}>{tr(strings.nav.skills, lang)}</a>
+          <a href="#trayectoria" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "trayectoria")}>{tr(strings.nav.trayectoria, lang)}</a>
           <a href="#contact" data-cuelume-hover="tick" onClick={(e) => scrollToId(e, "contact")}>{tr(strings.nav.contact, lang)}</a>
           <a href="#/lab" className="nav-lab" data-cuelume-hover="sparkle">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>

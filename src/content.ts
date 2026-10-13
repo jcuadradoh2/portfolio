@@ -4,6 +4,7 @@ export const t = {
   nav: {
     work: { es: "Proyectos", en: "Work" },
     skills: { es: "Skills", en: "Skills" },
+    trayectoria: { es: "Trayectoria", en: "Experience" },
     about: { es: "Sobre mí", en: "About me" },
     contact: { es: "Contacto", en: "Contact" },
     lab: { es: "Lab", en: "Lab" },
