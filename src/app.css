@@ -186,8 +186,7 @@ section[id] { scroll-margin-top: 72px; }
 
 /* ---------- Skills (list) ---------- */
 .skills-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-.skill-row { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; align-items: center; padding: 20px 26px;
- }
+.skill-row { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; align-items: center; padding: 20px 26px; }
 .skill-row .skill-badge { width: 48px; height: 48px; border-radius: 14px; }
 .skill-body { display: flex; flex-direction: column; gap: 10px; padding-left: 18px; border-left: 1px solid var(--border); min-height: 100%; justify-content: center; }
 .skill-head { display: flex; align-items: center; gap: 12px; }
