@@ -51,6 +51,8 @@ export const t = {
   },
   work: {
     eyebrow: { es: "Proyectos destacados", en: "Featured work" },
+    search: { es: "Buscar por nombre o stack (ej. Django, React)", en: "Search by name or stack (e.g. Django, React)" },
+    empty: { es: "Ningún proyecto coincide con la búsqueda.", en: "No project matches your search." },
     title: { es: "Código que puedes ejecutar y revisar", en: "Code you can run and read" },
     lead: {
       es: "Cada proyecto corre en local, tiene tests y deja las decisiones de arquitectura a la vista en el repositorio. AgentForge y el pipeline de OCR se muestran con código completo; el resto, con capturas del sistema en funcionamiento.",
@@ -225,7 +227,7 @@ export const projects: Project[] = [
     tags: ["Python", "pandas", "seaborn", "EDA", "Data Science"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/telco-churn-eda",
-    shots: ["churn-categorias.png", "tenure-densidad.png", "correlacion.png"],
+    shots: ["tenure-densidad.png", "churn-categorias.png", "correlacion.png"],
   },
   {
     key: "jobradar",

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, GraduationCap, Award, Code2 } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, GraduationCap, Award, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
@@ -351,6 +351,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function Work() {
   const { lang } = useLang();
+  const [q, setQ] = useState("");
+  const needle = q.trim().toLowerCase();
+  const list = projects.filter((p) => [p.name, ...p.tags].some((s) => s.toLowerCase().includes(needle)));
   return (
     <section id="work">
       <div className="container">
@@ -359,9 +362,15 @@ function Work() {
           <h2 className="section-title">{tr(strings.work.title, lang)}</h2>
           <p className="section-lead">{tr(strings.work.lead, lang)}</p>
         </Reveal>
+        <label className="project-search card">
+          <Search size={18} aria-hidden="true" />
+          <input type="search" value={q} onChange={(e) => setQ(e.target.value)}
+            placeholder={tr(strings.work.search, lang)} aria-label={tr(strings.work.search, lang)} />
+        </label>
         <div className="projects">
-          {projects.map((p, i) => <ProjectCard key={p.key} project={p} index={i} />)}
+          {list.map((p, i) => <ProjectCard key={p.key} project={p} index={i} />)}
         </div>
+        {!list.length && <p className="project-empty">{tr(strings.work.empty, lang)}</p>}
       </div>
     </section>
   );
