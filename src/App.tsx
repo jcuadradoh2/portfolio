@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, Play, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
-import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme } from "./hooks";
+import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
 import { t as strings } from "./content";
 import { TextReveal } from "./TextReveal";
 import "./app.css";
@@ -11,6 +11,7 @@ const Motion = lazy(() => import("./Motion"));
 
 const BASE = import.meta.env.BASE_URL;
 const GITHUB = "https://github.com/jcuadradoh2";
+const latest = projects.find((p) => p.featured) ?? projects[0];
 
 // Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
 // "#contact" hash would be read by HashRouter as a route and unmount the app.
@@ -19,21 +20,21 @@ function scrollToId(e: React.MouseEvent, id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// Per-category accent + icon (squoosh-style vivid palette) — index-aligned with skillGroups.
+// Per-category accent + icon (warm orange palette) — index-aligned with skillGroups.
 const SKILL_STYLE = [
-  { c: "#4361ee", Icon: Server },
-  { c: "#b5179e", Icon: Sparkles },
-  { c: "#06b6d4", Icon: Database },
+  { c: "#ff5a1f", Icon: Server },
+  { c: "#f97316", Icon: Sparkles },
+  { c: "#e8590c", Icon: Database },
   { c: "#f59e0b", Icon: Cloud },
-  { c: "#f72585", Icon: Zap },
-  { c: "#10b981", Icon: LayoutGrid },
+  { c: "#ef4444", Icon: Zap },
+  { c: "#fb923c", Icon: LayoutGrid },
 ];
 
 const HOW_STYLE = [
-  { c: "#4361ee", Icon: Boxes },
+  { c: "#ff5a1f", Icon: Boxes },
   { c: "#f59e0b", Icon: Workflow },
-  { c: "#10b981", Icon: ShieldCheck },
-  { c: "#b5179e", Icon: Target },
+  { c: "#e8590c", Icon: ShieldCheck },
+  { c: "#fb923c", Icon: Target },
 ];
 
 function AuroraBg() {
@@ -69,6 +70,8 @@ function Nav() {
           <a href="#/lab" className="nav-lab" data-cuelume-hover="sparkle">{tr(strings.nav.lab, lang)} ✦</a>
         </nav>
         <div className="nav-actions">
+          <a href="#contact" className="btn primary nav-cta" data-cuelume-press onClick={(e) => scrollToId(e, "contact")}>
+            {tr(strings.nav.cta, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
           <button className={`pill${soundOn ? " on" : ""}`} onClick={toggleSound}
             aria-label={lang === "es" ? "Alternar sonido" : "Toggle sound"} aria-pressed={soundOn}
             title={lang === "es" ? "Sonidos de interacción (cuelume)" : "Interaction sounds (cuelume)"}>
@@ -132,20 +135,100 @@ function Hero() {
       <AuroraBg />
       <div className="hero-spotlight" ref={spotRef} aria-hidden="true" />
       <div className="container hero-inner">
-        <motion.p className="eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}>{tr(strings.hero.role, lang)}</motion.p>
-        <TextReveal key={lang} as="h1" className="hero-title" per="word" preset="fade-in-blur"
-          speedReveal={1.1} delay={0.12}>{tr(strings.hero.title, lang)}</TextReveal>
-        <motion.p className="hero-lead" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.16 }}>{tr(strings.hero.lead, lang)}</motion.p>
-        <motion.div className="hero-cta" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.24 }}>
-          <a className="btn primary" href="#work" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaWork, lang)} →</a>
-          <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaGithub, lang)}</a>
-        </motion.div>
-        <Stats />
+        <div className="hero-copy">
+          <motion.p className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}><span className="hero-dot" />{tr(strings.hero.role, lang)}</motion.p>
+          <h1 className="hero-title" key={lang}>
+            <TextReveal as="span" per="word" preset="fade-in-blur" speedReveal={1.1} delay={0.12}>
+              {tr(strings.hero.titleA, lang)}</TextReveal>{" "}
+            <TextReveal as="span" className="hero-accent" per="word" preset="fade-in-blur" speedReveal={1.1} delay={0.5}>
+              {tr(strings.hero.titleB, lang)}</TextReveal>
+          </h1>
+          <motion.p className="hero-lead" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.16 }}>{tr(strings.hero.lead, lang)}</motion.p>
+          <motion.div className="hero-cta" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.24 }}>
+            <a className="btn primary" href="#work" data-cuelume-press data-cuelume-release onClick={(e) => scrollToId(e, "work")}>
+              {tr(strings.hero.ctaWork, lang)} <ArrowRight size={16} aria-hidden="true" /></a>
+            <a className="btn" href={GITHUB} target="_blank" rel="noreferrer" data-cuelume-press data-cuelume-release>{tr(strings.hero.ctaGithub, lang)}</a>
+            <a className="hero-watch" href="#motion" onClick={(e) => scrollToId(e, "motion")}>
+              <span className="hero-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span>
+              <span><b>{tr(strings.hero.watch, lang)}</b><small>{tr(strings.hero.watchSub, lang)}</small></span>
+            </a>
+          </motion.div>
+          <Stats />
+          <a className="latest card" href="#work" onClick={(e) => scrollToId(e, "work")}>
+            <img src={`${BASE}screenshots/${latest.key}/${latest.shots[0]}`} alt="" loading="lazy" />
+            <span className="latest-text">
+              <small>{tr(strings.hero.latest, lang)}</small>
+              <b>{latest.name}</b>
+              <span>{tr(latest.tagline, lang)}</span>
+            </span>
+            <span className="round-arrow"><ArrowRight size={16} aria-hidden="true" /></span>
+          </a>
+        </div>
+        <HeroVisual sectionRef={sectionRef} />
       </div>
+      <div className="scroll-cue" aria-hidden="true"><span>{tr(strings.hero.scroll, lang)}</span><i /></div>
     </section>
+  );
+}
+
+const SERVICE_ICONS = [Server, Sparkles, BarChart3];
+const RIBBON_PATH = "M40 330 a260 92 0 1 0 520 0 a260 92 0 1 0 -520 0";
+const RIBBON_REPEAT = 5;
+
+function HeroVisual({ sectionRef }: { sectionRef: React.RefObject<HTMLElement | null> }) {
+  const { lang } = useLang();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useVideoScrub(sectionRef, videoRef);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const ribbon = tr(strings.hero.ribbon, lang).repeat(RIBBON_REPEAT);
+  // Slide the text by exactly one phrase so the loop is seamless; re-measure once webfonts land.
+  useEffect(() => {
+    const fit = () => visualRef.current?.querySelectorAll<SVGTextElement>(".ribbon text").forEach((t) => {
+      t.querySelector("animate")?.setAttribute("to", String(-t.getComputedTextLength() / RIBBON_REPEAT));
+    });
+    fit();
+    document.fonts.ready.then(fit);
+  }, [lang]);
+  const band = (id: string) => (
+    <svg className={`ribbon ribbon-${id}`} viewBox="0 0 600 600" aria-hidden="true">
+      <defs>
+        <linearGradient id={`rg-${id}`} x1="0" x2="1">
+          <stop offset="0" stopColor="#ff9a4d" /><stop offset=".5" stopColor="#ff5a1f" /><stop offset="1" stopColor="#ff8a3d" />
+        </linearGradient>
+        <path id={`rp-${id}`} d={RIBBON_PATH} />
+        <clipPath id={`rc-${id}`}><rect x="-20" y="330" width="600" height="300" /></clipPath>
+      </defs>
+      <g transform="rotate(-9 300 330)">
+        <g clipPath={id === "front" ? `url(#rc-${id})` : undefined}>
+          <use href={`#rp-${id}`} fill="none" stroke={`url(#rg-${id})`} strokeWidth="30" />
+          <text><textPath href={`#rp-${id}`} dominantBaseline="central">{ribbon}
+            <animate attributeName="startOffset" from="0" to="0" dur="14s" repeatCount="indefinite" /></textPath></text>
+        </g>
+      </g>
+    </svg>
+  );
+  return (
+    <div className="hero-visual" ref={visualRef}>
+      <div className="hero-halo" aria-hidden="true" />
+      {band("back")}
+      <video ref={videoRef} className="hero-robot" src={`${BASE}robot.mp4`} poster={`${BASE}robot-poster.webp`} muted playsInline preload="auto" aria-hidden="true" />
+      {band("front")}
+      <ul className="services">
+        {strings.hero.services.map((s, i) => {
+          const Icon = SERVICE_ICONS[i];
+          return (
+            <li key={i} className={`service card s${i + 1}`}>
+              <span className="service-icon"><Icon size={18} aria-hidden="true" /></span>
+              <span><b>{tr(s.title, lang)}</b><small>{tr(s.body, lang)}</small></span>
+              <span className="round-arrow"><ArrowRight size={14} aria-hidden="true" /></span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

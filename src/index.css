@@ -1,30 +1,36 @@
 :root {
-  --bg: #0b0d16;
-  --bg-2: #10131f;
-  --surface: rgba(23, 27, 43, 0.7);
-  --surface-solid: #151a2b;
-  --border: rgba(130, 140, 190, 0.16);
-  --text: #eef1fb;
-  --text-dim: #99a2c2;
-  --brand: #5b8cff;
-  --brand-2: #17c8b4;
-  --accent: #c86bff;
-  --radius: 18px;
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-  --maxw: 1180px;
-  --font-sans: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --bg: #0f0d0c;
+  --bg-2: #161311;
+  --surface: linear-gradient(135deg, rgba(40, 32, 27, 0.62), rgba(24, 20, 17, 0.38));
+  --surface-solid: #1b1714;
+  --glass-edge: rgba(255, 255, 255, 0.12);
+  --glass-hi: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 240, 230, 0.1);
+  --text: #f6f1ec;
+  --text-dim: #aaa198;
+  --brand: #ff5a1f;
+  --brand-2: #ff7a3d;
+  --accent: #ff9a4d;
+  --ink: #ff7a3d;
+  --radius: 22px;
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  --maxw: 1240px;
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
 :root[data-theme="light"] {
-  --bg: #f3f5fb;
-  --bg-2: #e9edf8;
-  --surface: rgba(255, 255, 255, 0.78);
+  --bg: #f7f5f2;
+  --bg-2: #efebe6;
+  --surface: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.42));
   --surface-solid: #ffffff;
-  --border: rgba(60, 72, 130, 0.14);
-  --text: #141829;
-  --text-dim: #5a6488;
-  --shadow: 0 24px 60px rgba(50, 62, 120, 0.14);
+  --glass-edge: rgba(255, 255, 255, 0.85);
+  --glass-hi: rgba(255, 255, 255, 0.95);
+  --border: rgba(40, 24, 12, 0.08);
+  --text: #101114;
+  --text-dim: #5f6168;
+  --ink: #d9430c;
+  --shadow: 0 24px 60px -28px rgba(120, 60, 20, 0.28);
 }
 
 * { box-sizing: border-box; }
@@ -34,6 +40,14 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40vw 40vw at 92% 8%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 70%),
+    radial-gradient(36vw 36vw at 4% 60%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
+    radial-gradient(30vw 30vw at 70% 100%, color-mix(in srgb, var(--brand) 10%, transparent), transparent 70%);
 }
 
 body {
@@ -59,7 +73,7 @@ section { padding: 96px 0; position: relative; }
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--brand-2); margin-bottom: 14px;
+  color: var(--ink); margin-bottom: 14px;
 }
 
 .section-title { font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; }
@@ -67,22 +81,27 @@ section { padding: 96px 0; position: relative; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 22px; border-radius: 12px; font-family: var(--font-sans); font-weight: 600;
-  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  padding: 13px 24px; border-radius: 999px; font-family: var(--font-sans); font-weight: 600; font-size: 15px;
+  border: 1px solid var(--glass-edge); background: var(--surface); color: var(--text);
+  backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
   cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s;
 }
 .btn:hover { transform: translateY(-2px); border-color: var(--brand); }
 .btn.primary {
-  background: linear-gradient(135deg, var(--brand), var(--accent));
-  color: #fff; border: none; box-shadow: 0 12px 30px rgba(91, 140, 255, 0.4);
+  background: linear-gradient(135deg, #ff6a2b, #ff4a12);
+  color: #fff; border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 14px 30px -10px rgba(255, 90, 31, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
+.btn.primary:hover { box-shadow: 0 18px 36px -10px rgba(255, 90, 31, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
 .btn:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
 .btn.sm { padding: 6px 12px; font-size: 12.5px; border-radius: 8px; gap: 6px; }
 .tl-link { margin-top: 10px; }
 
 .card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  backdrop-filter: blur(16px); box-shadow: var(--shadow);
+  background: var(--surface); border: 1px solid var(--glass-edge); border-radius: var(--radius);
+  backdrop-filter: blur(22px) saturate(170%); -webkit-backdrop-filter: blur(22px) saturate(170%);
+  box-shadow: var(--shadow), inset 0 1px 0 var(--glass-hi);
 }
 
 .tag {

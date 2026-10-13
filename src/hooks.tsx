@@ -114,3 +114,66 @@ export function useCountUp(target: string, run: boolean) {
   }, [target, run]);
   return display;
 }
+
+// Cursor-driven video scrubbing via seek-chaining: on each 'seeked' we jump to
+// the latest target only if it changed, so we never queue seeks faster than the
+// decoder can serve them. With the all-intra 720p clip each seek is a single-frame
+// decode, so this stays fluid. Mobile / reduced-motion fall back to looped autoplay.
+export function useVideoScrub(sectionRef: React.RefObject<HTMLElement | null>, videoRef: React.RefObject<HTMLVideoElement | null>) {
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (window.innerWidth < 1024 || reduced) {
+      video.loop = true;
+      video.muted = true;
+      video.autoplay = true;
+      video.play().catch(() => {});
+      return;
+    }
+
+    let target = 0;
+    let lastReq = -1;
+    let ready = false;
+    let seeking = false;
+    let raf = 0;
+    let rafPending = false;
+
+    const applySeek = () => {
+      if (!ready || !video.duration) return;
+      if (target === lastReq) { seeking = false; return; }
+      lastReq = target;
+      seeking = true;
+      video.currentTime = target;
+    };
+    const onSeeked = () => applySeek();
+    const onMove = (e: MouseEvent) => {
+      const r = section.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      target = p * (video.duration || 0);
+      if (rafPending) return;
+      rafPending = true;
+      raf = requestAnimationFrame(() => { rafPending = false; if (!seeking) applySeek(); });
+    };
+    const onReady = () => {
+      ready = true;
+      video.pause();
+      target = (video.duration || 0) * 0.5;
+      lastReq = -1;
+      applySeek();
+    };
+
+    video.addEventListener("seeked", onSeeked);
+    section.addEventListener("mousemove", onMove);
+    if (video.readyState >= 2) onReady();
+    else video.addEventListener("loadeddata", onReady, { once: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      video.removeEventListener("seeked", onSeeked);
+      section.removeEventListener("mousemove", onMove);
+    };
+  }, [sectionRef, videoRef]);
+}
