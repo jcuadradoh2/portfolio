@@ -159,6 +159,7 @@ export interface Project {
   tagline: { es: string; en: string };
   description: { es: string; en: string };
   tags: string[];
+  keywords?: string[];
   featured: boolean;
   repo: string;
   shots: string[];
@@ -176,6 +177,7 @@ export const projects: Project[] = [
       en: "Spring Boot 3 with strict hexagonal architecture: build LLM agents, a tool-use loop, concurrent orchestration (sequential/parallel via CompletableFuture), SSE streaming and JWT security. Real Anthropic provider + a deterministic mock.",
     },
     tags: ["Java 17", "Spring Boot", "Hexagonal", "JWT", "SSE", "JUnit"],
+    keywords: ["Java", "Spring", "LLM", "IA", "AI", "Anthropic", "Claude", "REST", "Backend"],
     featured: true,
     repo: "https://github.com/jcuadradoh2/agentforge",
     shots: ["chat-dark.png", "pipeline-dark.png", "login-dark.png"],
@@ -192,6 +194,7 @@ export const projects: Project[] = [
       en: "A working prototype that replicates the document-OCR pipeline I shipped to production inside the academic-management system of a higher-education institution (admissions intake). Rewritten from scratch and sanitized: no proprietary code, no secrets, synthetic data. The OCR engine is a hexagonal port with layer-by-layer escalation —native PDF text layer via pypdf, then a Google Document AI-style vision engine—, real Ecuadorian ID checksum validation (mod-10, provinces 01–24 and 30, third-digit rule) and local-format amount extraction/reconciliation (1.900,00) within a 2-cent tolerance.",
     },
     tags: ["Python", "Django", "OCR", "Document AI", "Hexagonal", "pypdf"],
+    keywords: ["Django REST", "IA", "AI", "PDF", "Backend", "REST"],
     featured: true,
     repo: "https://github.com/jcuadradoh2/academic-modules-showcase/tree/main/backend/ocr",
     shots: ["ocr-dark.webp"],
@@ -208,6 +211,7 @@ export const projects: Project[] = [
       en: "Proof of concept for a fictional distributor: a LangGraph agent that decides whether to answer from live ERP data, from internal policies (RAG with verified citations) or both, and abstains when there is no evidence. Permissions are enforced by the server, not the model. Includes an admin panel with the full trace of every turn, document management, Ragas evaluation and Telegram notifications with email fallback.",
     },
     tags: ["Python", "Django · DRF", "LangGraph", "Gemini", "pgvector", "React 19"],
+    keywords: ["Django REST Framework", "LLM", "IA", "AI", "RAG", "Agentes", "PostgreSQL", "React", "JavaScript", "Full Stack"],
     featured: true,
     repo: "",
     private: true,
@@ -223,6 +227,7 @@ export const projects: Project[] = [
       en: "End-to-end EDA pipeline over 7,043 telco customers: hidden-null detection, justified imputation, univariate/bivariate analysis, correlations and IQR rule. Actionable business findings (52.9% churn in new customers vs 26.5% overall) and a step-by-step educational README. Groundwork for a scikit-learn predictive model.",
     },
     tags: ["Python", "pandas", "seaborn", "EDA", "Data Science"],
+    keywords: ["Ciencia de datos", "Análisis de datos", "Data Analysis", "Estadística", "matplotlib", "NumPy"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/telco-churn-eda",
     shots: ["tenure-densidad.png", "churn-categorias.png", "correlacion.png"],
@@ -236,6 +241,7 @@ export const projects: Project[] = [
       en: ".NET 10 hexagonal: concurrent fan-out across job portals (Computrabajo, LinkedIn, Multitrabajos…), Polly resilience, per-host rate limiting, local-market normalization and SQLite dedup. 27 offline tests over real fixtures.",
     },
     tags: [".NET 10", "C#", "Polly", "EF Core", "AngleSharp", "xUnit"],
+    keywords: ["dotnet", "C Sharp", "Entity Framework", "Scraping", "Backend"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/jobradar-ec",
     shots: ["swagger-overview-dark.png", "swagger-search-dark.png"],
@@ -249,6 +255,7 @@ export const projects: Project[] = [
       en: "The rest of the sanitized replica of the institution's academic ERP, alongside the OCR module: PDF e-signature with endesive (real PAdES/CMS using an Ecuador-format .p12 cert and concurrent batch signing via ThreadPoolExecutor), and a PlaceToPay-style gateway with a constant-time signed-webhook check, idempotency and to-the-cent header/line reconciliation. Django + DRF + React, fully rewritten with no real data.",
     },
     tags: ["Django", "DRF", "endesive", "React", "Cryptography", "SimpleJWT"],
+    keywords: ["Python", "Django REST Framework", "JavaScript", "Firma electrónica", "PDF", "Full Stack"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/academic-modules-showcase",
     shots: ["dashboard-dark.png", "firma-dark.png", "pagos-dark.png"],
@@ -262,6 +269,7 @@ export const projects: Project[] = [
       en: "Pure frontend with modern Angular 20: standalone components, signals, new control flow (@if/@for), animated charts, light/dark theme, ES/EN i18n and AA accessibility. Skeleton loaders and micro-interactions.",
     },
     tags: ["Angular 20", "Signals", "TypeScript", "Charts", "a11y"],
+    keywords: ["Angular", "JavaScript", "Frontend", "Dashboard", "Accesibilidad"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/angular-insight-dashboard",
     shots: ["dashboard-dark.png"],
@@ -275,6 +283,7 @@ export const projects: Project[] = [
       en: "Case study and living style guide: tokens (color/type/spacing/elevation), color psychology, a component library in light/dark, an AI-assisted design process and runtime WCAG contrast verification.",
     },
     tags: ["Design System", "Figma + IA", "WCAG AA", "Vite", "TypeScript"],
+    keywords: ["Figma", "UI", "UX", "CSS", "Accesibilidad", "Accessibility", "JavaScript", "Frontend"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/aurora-design-system",
     shots: ["hero-dark.png", "tokens-dark.png", "components-dark.png"],
@@ -288,6 +297,7 @@ export const projects: Project[] = [
       en: "The site you're looking at and its /lab of experiments. React 19 + Vite 8 + TypeScript, bilingual ES/EN, light/dark theme and accessibility. The engineering is in the performance: Remotion code-split out of the initial bundle (−40% JS), a showreel pre-rendered to a looping MP4 instead of reconciling the composition at 30fps at runtime, cursor-driven video scrubbing over an all-intra clip, and animations shut off outside the viewport via IntersectionObserver.",
     },
     tags: ["React 19", "Vite", "TypeScript", "Remotion", "WebGL", "Framer Motion"],
+    keywords: ["React", "JavaScript", "Frontend", "Animación", "Animation", "Three.js"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/portfolio",
     shots: ["hero.webp", "lab-remotion.webp", "lab-lithos.webp", "lab-pulse3d.webp"],
@@ -301,6 +311,7 @@ export const projects: Project[] = [
       en: "Enterprise administration platform (Laravel + Vue SPA) with a Security module —full RBAC: users, roles, permissions, modules, groups, departments— and an Accounting module —cash flow, master-data CRUD (products, clients, suppliers) and transactions—. JWT + LDAP/Active Directory auth, real-time notifications over WebSockets, PDF/barcode generation and thermal (POS) printing, Excel export and ODBC integration. Served as the base for later projects.",
     },
     tags: ["Laravel", "Vue 2 · Vuex", "PostgreSQL", "JWT", "WebSockets", "RBAC"],
+    keywords: ["PHP", "Vue", "Vue.js", "JavaScript", "Postgres", "SQL", "Backend", "Full Stack", "ERP"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/nexo-erp",
     private: true,
@@ -315,6 +326,7 @@ export const projects: Project[] = [
       en: "Mobile shopping app for a clothing store built with Flutter (Dart · Material Design): category browsing, promo carousel, product details, cart with checkout and login. Screen-and-component architecture (horizontal list, product grid, cart).",
     },
     tags: ["Flutter", "Dart", "Material Design", "Mobile"],
+    keywords: ["Android", "iOS", "Móvil", "App", "E-commerce"],
     featured: false,
     repo: "https://github.com/jcuadradoh2/flutter_tienda_virtual",
     shots: ["home-mock.png"],

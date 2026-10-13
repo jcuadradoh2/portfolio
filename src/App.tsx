@@ -350,8 +350,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 function Work() {
   const { lang } = useLang();
   const [q, setQ] = useState("");
-  const needle = q.trim().toLowerCase();
-  const list = projects.filter((p) => [p.name, ...p.tags].some((s) => s.toLowerCase().includes(needle)));
+  const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  const needle = fold(q.trim());
+  const list = projects.filter((p) => [p.name, ...p.tags, ...(p.keywords ?? [])].some((s) => fold(s).includes(needle)));
   return (
     <section id="work">
       <div className="container">
