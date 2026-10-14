@@ -38,6 +38,7 @@ function scrollToId(e: React.MouseEvent, id: string) {
 // Per-category accent + icon (warm orange palette) — index-aligned with skillGroups.
 const SKILL_STYLE = [
   { c: "#ff5a1f", Icon: Server },
+  { c: "#ea580c", Icon: Code2 },
   { c: "#f97316", Icon: Sparkles },
   { c: "#e8590c", Icon: Database },
   { c: "#f59e0b", Icon: Cloud },

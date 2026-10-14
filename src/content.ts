@@ -391,8 +391,9 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  { title: { es: "Backend & APIs", en: "Backend & APIs" }, items: ["Python · Django · DRF", "FastAPI", "Java · Spring Boot", "PHP · Laravel", ".NET · C# · Entity Framework · ADO.NET", "Celery · Redis", "REST · JWT · SSE · WebSockets", "Arquitectura hexagonal · SOLID", "JUnit · xUnit"] },
-  { title: { es: "IA Aplicada & LLMs", en: "Applied AI & LLMs" }, items: ["Anthropic · Gemini · OpenAI · Ollama", "LangGraph · Agentes inteligentes", "RAG · pgvector · Ragas", "Visión multimodal", "Document AI · OCR · PaddleOCR"] },
+  { title: { es: "Backend & APIs", en: "Backend & APIs" }, items: ["Python · Django · DRF", "FastAPI", "Java · Spring Boot", "PHP · Laravel", ".NET · C# · Entity Framework · ADO.NET", "Celery · Redis", "REST · JWT · SSE · WebSockets"] },
+  { title: { es: "Ingeniería de Software", en: "Software Engineering" }, items: ["Arquitectura hexagonal · Clean Architecture", "SOLID", "DRY · KISS · YAGNI", "Patrones de diseño", "Clean Code · Code review", "Testing · JUnit · xUnit · pytest", "Concurrencia · Idempotencia"] },
+  { title: { es: "IA Aplicada & LLMs", en: "Applied AI & LLMs" }, items: ["LLMs · Prompt engineering", "LangChain · LangGraph", "Agentes inteligentes · Tool use", "Anthropic · Gemini · OpenAI · Ollama", "RAG · pgvector · Ragas", "Visión multimodal", "Document AI · OCR · PaddleOCR"] },
   { title: { es: "Datos & Analítica", en: "Data & Analytics" }, items: ["PostgreSQL · SQLite", "SQL avanzado · ODBC", "Pandas · NumPy · seaborn", "EDA · scikit-learn", "Apache Superset", "Modelado de datos"] },
   { title: { es: "DevOps & Cloud", en: "DevOps & Cloud" }, items: ["Docker · Git", "CI/CD · Linux · Nginx", "GCP · Azure", "Sentry", "Gunicorn · Uvicorn"] },
   { title: { es: "Automatización & Integraciones", en: "Automation & Integrations" }, items: ["Telegram · webhooks", "Celery (async)", "Moodle", "Firma electrónica (PAdES)", "Pasarelas de pago (PlaceToPay)", "LDAP · Active Directory", "Scraping · Polly · AngleSharp"] },
