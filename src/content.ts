@@ -67,6 +67,13 @@ export const t = {
   skills: {
     eyebrow: { es: "Especialización", en: "Expertise" },
     title: { es: "Áreas de especialización", en: "Areas of expertise" },
+    search: { es: "Buscar tecnología (ej. Django, RAG, Docker)", en: "Search a technology (e.g. Django, RAG, Docker)" },
+    clear: { es: "Limpiar búsqueda", en: "Clear search" },
+    filter: { es: "Filtrar por área", en: "Filter by area" },
+    all: { es: "Todas", en: "All" },
+    count: { es: "tecnologías", en: "technologies" },
+    count1: { es: "tecnología", en: "technology" },
+    empty: { es: "Sin resultados para", en: "No results for" },
     lead: { es: "Tecnologías que utilizo habitualmente para diseñar, construir y operar sistemas de software en producción.",
             en: "The technologies I regularly use to design, build and operate software systems in production." },
   },

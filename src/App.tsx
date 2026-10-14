@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, Plus, ArrowLeft, Mail, GraduationCap, Award, Code2 } from "lucide-react";
+import { Server, Sparkles, Database, Cloud, Zap, LayoutGrid, Boxes, Workflow, ShieldCheck, Target, ArrowRight, ArrowUpRight, Play, BarChart3, Search, Plus, ArrowLeft, Mail, X, GraduationCap, Award, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { principles, projects, skillGroups, timeline, type Principle, type Project } from "./content";
 import { AppProviders, Reveal, tr, useCountUp, useLang, useSound, useTheme, useVideoScrub } from "./hooks";
@@ -362,10 +362,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+
 function Work({ all = false }: { all?: boolean }) {
   const { lang } = useLang();
   const [q, setQ] = useState("");
-  const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
   const needle = fold(q.trim());
   const list = !all ? HOME_PROJECTS : projects.filter((p) => [p.name, ...p.tags, ...(p.keywords ?? [])].some((s) => fold(s).includes(needle)));
   return (
@@ -407,8 +408,19 @@ function Work({ all = false }: { all?: boolean }) {
   );
 }
 
+const SKILLS = skillGroups.map((g, i) => ({ ...g, ...SKILL_STYLE[i % SKILL_STYLE.length], chips: g.items.flatMap((it) => it.split(" · ")) }));
+
 function Skills() {
   const { lang } = useLang();
+  const [q, setQ] = useState("");
+  const [cat, setCat] = useState(-1);
+  const needle = fold(q.trim());
+  const shown = SKILLS.map((g, i) => {
+    if (cat >= 0 && cat !== i) return null;
+    const chips = !needle || fold(tr(g.title, lang)).includes(needle) ? g.chips : g.chips.filter((s) => fold(s).includes(needle));
+    return chips.length ? { ...g, i, chips } : null;
+  }).filter((g) => g !== null);
+  const n = new Set(shown.flatMap((g) => g.chips)).size;
   return (
     <section id="skills">
       <div className="container">
@@ -418,22 +430,39 @@ function Skills() {
           <p className="section-lead">{tr(strings.skills.lead, lang)}</p>
         </Reveal>
         <Reveal>
-          <ul className="skills-list">
-            {skillGroups.map((g, i) => {
-              const { c, Icon } = SKILL_STYLE[i % SKILL_STYLE.length];
-              return (
-                <li key={i} className="skill-row card" style={{ "--c": c } as CSSProperties}>
-                  <span className="skill-badge"><Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
-                  <div className="skill-body">
-                    <h4>{tr(g.title, lang)}</h4>
-                    <div className="skill-chips">
-                      {g.items.map((it) => <span className="skill-chip" key={it}>{it}</span>)}
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
+          <div className="skills-bar">
+            <label className="project-search card">
+              <Search size={18} aria-hidden="true" />
+              <input type="search" value={q} onChange={(e) => setQ(e.target.value)}
+                placeholder={tr(strings.skills.search, lang)} aria-label={tr(strings.skills.search, lang)} />
+              {q && <button type="button" className="search-clear" onClick={() => setQ("")} aria-label={tr(strings.skills.clear, lang)}><X size={16} /></button>}
+            </label>
+            <p className="skills-count" aria-live="polite"><b>{n}</b> {tr(n === 1 ? strings.skills.count1 : strings.skills.count, lang)}</p>
+          </div>
+          <div className="skills-tabs" role="group" aria-label={tr(strings.skills.filter, lang)}>
+            <button type="button" className={cat < 0 ? "on" : undefined} aria-pressed={cat < 0} onClick={() => setCat(-1)}>{tr(strings.skills.all, lang)}</button>
+            {SKILLS.map((g, i) => (
+              <button type="button" key={i} className={cat === i ? "on" : undefined} aria-pressed={cat === i}
+                style={{ "--c": g.c } as CSSProperties} onClick={() => setCat(cat === i ? -1 : i)}>
+                <g.Icon size={15} aria-hidden="true" />{tr(g.title, lang)}<span>{g.chips.length}</span>
+              </button>
+            ))}
+          </div>
+          <ul className="skills-grid">
+            {shown.map((g) => (
+              <li key={g.i} className="skill-card card" style={{ "--c": g.c } as CSSProperties}>
+                <div className="skill-head">
+                  <span className="skill-badge"><g.Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
+                  <h3>{tr(g.title, lang)}</h3>
+                  <span className="skill-n">{g.chips.length}</span>
+                </div>
+                <ul className="skill-chips">
+                  {g.chips.map((s) => <li className="skill-chip" key={s}>{s}</li>)}
+                </ul>
+              </li>
+            ))}
           </ul>
+          {!shown.length && <p className="project-empty">{tr(strings.skills.empty, lang)} “{q}”</p>}
         </Reveal>
       </div>
     </section>
