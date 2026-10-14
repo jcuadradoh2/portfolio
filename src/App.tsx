@@ -537,6 +537,7 @@ const CLIENTS = [
   { name: "Universidad Casa Grande", src: "logos/ucg.png" },
   { name: "UPSE", src: "logos/upse.jpg", tall: true },
   { name: "Exducere", src: "logos/exducere.svg" },
+  { name: "Elevra", src: "logos/elevra.png" },
   { name: "UNEMI", src: "logos/unemi.png" },
   { name: "EPUNEMI", src: "logos/epunemi.svg" },
 ];

@@ -391,12 +391,12 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = [
-  { title: { es: "Backend & APIs", en: "Backend & APIs" }, items: ["Python · Django · DRF", "FastAPI", "Java · Spring Boot", "Celery · Redis", "REST · SOLID"] },
-  { title: { es: "IA Aplicada & LLMs", en: "Applied AI & LLMs" }, items: ["OpenAI API · Ollama", "Agentes inteligentes", "Visión multimodal", "Document AI · OCR", "PaddleOCR"] },
-  { title: { es: "Datos & Analítica", en: "Data & Analytics" }, items: ["PostgreSQL", "SQL avanzado", "Pandas", "Apache Superset", "Modelado de datos"] },
+  { title: { es: "Backend & APIs", en: "Backend & APIs" }, items: ["Python · Django · DRF", "FastAPI", "Java · Spring Boot", "PHP · Laravel", ".NET · C# · Entity Framework · ADO.NET", "Celery · Redis", "REST · JWT · SSE · WebSockets", "Arquitectura hexagonal · SOLID", "JUnit · xUnit"] },
+  { title: { es: "IA Aplicada & LLMs", en: "Applied AI & LLMs" }, items: ["Anthropic · Gemini · OpenAI · Ollama", "LangGraph · Agentes inteligentes", "RAG · pgvector · Ragas", "Visión multimodal", "Document AI · OCR · PaddleOCR"] },
+  { title: { es: "Datos & Analítica", en: "Data & Analytics" }, items: ["PostgreSQL · SQLite", "SQL avanzado · ODBC", "Pandas · NumPy · seaborn", "EDA · scikit-learn", "Apache Superset", "Modelado de datos"] },
   { title: { es: "DevOps & Cloud", en: "DevOps & Cloud" }, items: ["Docker · Git", "CI/CD · Linux · Nginx", "GCP · Azure", "Sentry", "Gunicorn · Uvicorn"] },
-  { title: { es: "Automatización", en: "Automation" }, items: ["Telegram · webhooks", "Celery (async)", "Moodle", "Integración de sistemas"] },
-  { title: { es: "Frontend & Procesos", en: "Frontend & Process" }, items: ["React · Svelte", "TypeScript · JS", "Bootstrap · CSS3", "BPMN · Scrum"] },
+  { title: { es: "Automatización & Integraciones", en: "Automation & Integrations" }, items: ["Telegram · webhooks", "Celery (async)", "Moodle", "Firma electrónica (PAdES)", "Pasarelas de pago (PlaceToPay)", "LDAP · Active Directory", "Scraping · Polly · AngleSharp"] },
+  { title: { es: "Frontend, Móvil & Procesos", en: "Frontend, Mobile & Process" }, items: ["React · Angular · Vue · Svelte", "TypeScript · JS", "Flutter · Dart", "Three.js · WebGL · Remotion", "Figma · Design Systems · WCAG", "Bootstrap · CSS3", "BPMN · Scrum"] },
 ];
 
 type Texto = { es: string; en: string };
