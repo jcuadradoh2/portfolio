@@ -448,17 +448,19 @@ function Skills() {
               </button>
             ))}
           </div>
-          <ul className="skills-grid">
+          <ul className="skills-list">
             {shown.map((g) => (
-              <li key={g.i} className="skill-card card" style={{ "--c": g.c } as CSSProperties}>
-                <div className="skill-head">
-                  <span className="skill-badge"><g.Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
-                  <h3>{tr(g.title, lang)}</h3>
-                  <span className="skill-n">{g.chips.length}</span>
+              <li key={g.i} className="skill-row card" style={{ "--c": g.c } as CSSProperties}>
+                <span className="skill-badge"><g.Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
+                <div className="skill-body">
+                  <div className="skill-head">
+                    <h3>{tr(g.title, lang)}</h3>
+                    <span className="skill-n">{g.chips.length}</span>
+                  </div>
+                  <ul className="skill-chips">
+                    {g.chips.map((s) => <li className="skill-chip" key={s}>{s}</li>)}
+                  </ul>
                 </div>
-                <ul className="skill-chips">
-                  {g.chips.map((s) => <li className="skill-chip" key={s}>{s}</li>)}
-                </ul>
               </li>
             ))}
           </ul>
