@@ -5,12 +5,12 @@ const PROJECTS = ["AgentForge", "JobRadar EC", "Academic Modules", "Insight Dash
 function Background() {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-  const hue = interpolate(frame, [0, durationInFrames], [220, 300]);
+  const hue = interpolate(frame, [0, durationInFrames], [8, 28]);
   return (
     <AbsoluteFill
       style={{
-        background: `radial-gradient(circle at 30% 20%, hsl(${hue} 80% 22%), #0a0d18 60%),
-                     radial-gradient(circle at 80% 90%, hsl(${hue + 40} 70% 18%), transparent 55%)`,
+        background: `radial-gradient(circle at 30% 20%, hsl(${hue} 85% 16%), #0f0d0c 60%),
+                     radial-gradient(circle at 80% 90%, hsl(${hue + 12} 80% 14%), transparent 55%)`,
       }}
     />
   );
@@ -23,7 +23,7 @@ function Grid() {
     <AbsoluteFill
       style={{
         backgroundImage:
-          "linear-gradient(rgba(120,140,220,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(120,140,220,.08) 1px, transparent 1px)",
+          "linear-gradient(rgba(255,150,90,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,150,90,.07) 1px, transparent 1px)",
         backgroundSize: "54px 54px",
         backgroundPosition: `0 ${y}px`,
         maskImage: "radial-gradient(circle at 50% 45%, #000, transparent 78%)",
@@ -41,10 +41,10 @@ function Intro() {
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <div style={{ transform: `translateY(${y}px)`, opacity: rise }}>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 90, color: "#fff", letterSpacing: "-0.03em" }}>
+        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 90, color: "#fff", letterSpacing: "-0.03em" }}>
           Jefferson Cuadrado
         </div>
-        <div style={{ marginTop: 10, fontSize: 30, color: "#17c8b4", opacity: sub, fontWeight: 600 }}>
+        <div style={{ marginTop: 10, fontSize: 30, color: "#ff7a3d", opacity: sub, fontWeight: 600 }}>
           Backend Python/Django · IA Aplicada
         </div>
       </div>
@@ -57,7 +57,7 @@ function Projects() {
   const { fps } = useVideoConfig();
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
-      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 24, color: "#99a2c2", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 34 }}>
+      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, color: "#aaa198", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 34 }}>
         {(() => {
           const o = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: "clamp" });
           return <span style={{ opacity: o }}>Proyectos</span>;
@@ -74,12 +74,12 @@ function Projects() {
                 opacity: enter,
                 padding: "16px 30px",
                 borderRadius: 16,
-                background: "linear-gradient(135deg, rgba(91,140,255,.28), rgba(200,107,255,.22))",
-                border: "1px solid rgba(140,160,255,.35)",
+                background: "linear-gradient(135deg, rgba(255,106,43,.30), rgba(255,154,77,.16))",
+                border: "1px solid rgba(255,170,120,.4)",
                 color: "#fff",
                 fontSize: 30,
                 fontWeight: 600,
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
             >
               {name}
@@ -98,10 +98,10 @@ function Outro() {
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <div style={{ opacity: s, transform: `scale(${interpolate(s, [0, 1], [0.9, 1])})` }}>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 64, color: "#fff", fontWeight: 700, letterSpacing: "-0.03em" }}>
+        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 64, color: "#fff", fontWeight: 700, letterSpacing: "-0.03em" }}>
           Código + criterio
         </div>
-        <div style={{ marginTop: 14, fontSize: 26, color: "#99a2c2" }}>
+        <div style={{ marginTop: 14, fontSize: 26, color: "#aaa198" }}>
           github.com/jcuadradoh2
         </div>
       </div>
