@@ -228,6 +228,7 @@ export interface Project {
   repo: string;
   shots: string[];
   private?: boolean;
+  live?: string;
   doc?: { href: string; label: { es: string; en: string } };
 }
 
@@ -281,6 +282,25 @@ export const projects: Project[] = [
     private: true,
     doc: { href: "docs/atlas-instructivo.pdf", label: { es: "Ver instructivo (PDF)", en: "User guide (PDF, Spanish)" } },
     shots: ["chat-cliente.png", "chat-mixed.png", "traza.png", "panel-resumen.png", "conocimiento-visor.png"],
+  },
+  {
+    key: "intermen",
+    name: "Intermen",
+    tagline: {
+      es: "Cobranza y cortes de un ISP, conectados al router",
+      en: "ISP billing and service cuts, wired to the router",
+    },
+    description: {
+      es: "Sistema en producción para un proveedor de internet: sitio web con verificación de cobertura, panel de clientes, cobros, pagos y cortes con permisos por módulo, y app móvil para Android e iOS. Se conecta por SSH a un router Ubiquiti: cortar agrega la IP del cliente al grupo de firewall MOROSOS y registrar el pago la quita, con un solo commit por operación y ping previo a cada equipo. El corte automático corre cada noche al vencer el plazo de pago, cada pago genera una factura PDF por correo y la Gerencia recibe los avisos. Corre con Docker en Google Cloud, dentro de la capa gratuita.",
+      en: "Production system for an internet service provider: public site with coverage lookup, an admin panel for customers, billing, payments and service cuts with per-module permissions, and an Android/iOS mobile app. It connects over SSH to a Ubiquiti router: cutting adds the customer's IP to the MOROSOS firewall group and recording the payment removes it, with a single commit per operation and a ping to each device first. Automatic cuts run nightly once the payment window closes, every payment emails a PDF invoice and management gets the alerts. Runs on Docker in Google Cloud, inside the free tier.",
+    },
+    tags: ["Django · DRF", "React 19", "Expo · React Native", "PostgreSQL", "Paramiko SSH", "Docker · GCP"],
+    keywords: ["Python", "Django REST Framework", "React", "TypeScript", "React Native", "Expo", "Android", "iOS", "Móvil", "Mobile", "Redes", "Networking", "Router", "Ubiquiti", "SSH", "WeasyPrint", "PDF", "Caddy", "Google Cloud", "Full Stack", "ISP", "Facturación", "Billing"],
+    featured: false,
+    repo: "",
+    private: true,
+    live: "https://intermen.net",
+    shots: ["panel-inicio.webp", "cortes.webp", "app-movil.webp", "cobros.webp", "sitio-web.webp"],
   },
   {
     key: "telco",

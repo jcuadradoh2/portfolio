@@ -23,8 +23,8 @@ const BRAND_PATHS = {
 function Brand({ name }: { name: keyof typeof BRAND_PATHS }) {
   return <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={BRAND_PATHS[name]} /></svg>;
 }
-const latest = projects.find((p) => p.key === "atlas") ?? projects[0];
-const HOME_PROJECTS = ["atlas", "agentforge", "ocr"].map((k) => projects.find((p) => p.key === k)!);
+const latest = projects.find((p) => p.key === "intermen") ?? projects[0];
+const HOME_PROJECTS = ["intermen", "atlas", "agentforge"].map((k) => projects.find((p) => p.key === k)!);
 
 // Smooth-scroll to an in-page section WITHOUT changing the router hash — a bare
 // "#contact" hash would be read by HashRouter as a route and unmount the app.
@@ -348,6 +348,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             ) : (
               <a className="project-link" href={project.repo} target="_blank" rel="noreferrer">
                 {tr(strings.work.view, lang)} <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            )}
+            {project.live && (
+              <a className="project-link" href={project.live} target="_blank" rel="noreferrer">
+                {lang === "es" ? "Ver en producción" : "Live site"} <ArrowUpRight size={15} aria-hidden="true" />
               </a>
             )}
             {project.doc && (
