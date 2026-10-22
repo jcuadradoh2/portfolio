@@ -456,7 +456,7 @@ function Skills() {
           <ul className="skills-list">
             {shown.map((g) => (
               <li key={g.i} className="skill-row card" style={{ "--c": g.c } as CSSProperties}>
-                <span className="skill-badge"><g.Icon size={20} strokeWidth={2.2} aria-hidden="true" /></span>
+                <span className="skill-badge"><g.Icon size={18} strokeWidth={2.2} aria-hidden="true" /></span>
                 <div className="skill-body">
                   <div className="skill-head">
                     <h3>{tr(g.title, lang)}</h3>
