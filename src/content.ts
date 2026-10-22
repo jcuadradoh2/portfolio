@@ -277,7 +277,7 @@ export const projects: Project[] = [
     },
     tags: ["Python", "Django · DRF", "LangGraph", "Gemini", "pgvector", "React 19"],
     keywords: ["Django REST Framework", "LLM", "IA", "AI", "RAG", "Agentes", "PostgreSQL", "React", "JavaScript", "Full Stack"],
-    featured: true,
+    featured: false,
     repo: "",
     private: true,
     doc: { href: "docs/atlas-instructivo.pdf", label: { es: "Ver instructivo (PDF)", en: "User guide (PDF, Spanish)" } },
