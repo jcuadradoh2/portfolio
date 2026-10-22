@@ -314,6 +314,7 @@ function HowIWork() {
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { lang } = useLang();
   const [active, setActive] = useState(0);
+  const [allTags, setAllTags] = useState(false);
   const shot = `${BASE}screenshots/${project.key}/${project.shots[active]}`;
   const extra = project.tags.length - 3;
   return (
@@ -339,8 +340,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <p className="project-tagline" title={tr(project.tagline, lang)}>{tr(project.tagline, lang)}</p>
           <p className="project-desc">{tr(project.description, lang)}</p>
           <div className="project-tags">
-            {project.tags.slice(0, 3).map((tag) => <span key={tag} className="tag">{tag}</span>)}
-            {extra > 0 && <span className="tag tag-more" title={project.tags.slice(3).join(" · ")}>+{extra}</span>}
+            {(allTags ? project.tags : project.tags.slice(0, 3)).map((tag) => <span key={tag} className="tag">{tag}</span>)}
+            {extra > 0 && (
+              <button type="button" className="tag tag-more" aria-expanded={allTags} onClick={() => setAllTags(!allTags)}>
+                {allTags ? (lang === "es" ? "Ver menos" : "Show less") : `+${extra}`}
+              </button>
+            )}
           </div>
           <div className="project-foot">
             {project.private ? (

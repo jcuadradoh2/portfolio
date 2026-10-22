@@ -175,7 +175,9 @@ section[id] { scroll-margin-top: 72px; }
 .project-desc { color: var(--text-dim); font-size: 14px; line-height: 1.55; margin: 10px 0 14px;
   display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-.tag-more { background: transparent; border: 1px dashed color-mix(in srgb, var(--brand) 45%, transparent); cursor: help; }
+.tag-more { line-height: inherit; background: transparent; border: 1px dashed color-mix(in srgb, var(--brand) 45%, transparent); cursor: pointer; }
+.tag-more:hover { border-style: solid; }
+.tag-more:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .project-foot { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
 .project-link { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--ink); }
 .project-link:hover { text-decoration: underline; text-underline-offset: 3px; }
